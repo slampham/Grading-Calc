@@ -2,20 +2,11 @@ package org.ecs160.a1;
 
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.*;
-import com.codename1.ui.layouts.BorderLayout;
-import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.GridLayout;
+import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Border;
 
-public class FormRPNCalc extends Form {
-    // four containers to populate display
-    Container tRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
-    Container zRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
-    Container yRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
-    Container xRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
-
-    Container display = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-
+public class Keypad extends Container {
     // five containers to populate keypad
     Container sci1 = new Container(new GridLayout(2,5));
     Container num2 = new Container(new GridLayout(1, 5));
@@ -23,32 +14,15 @@ public class FormRPNCalc extends Form {
     Container num4 = new Container(new GridLayout(1, 5));
     Container num5 = new Container(new GridLayout(1, 5));
 
-    Container keypad = new Container(new GridLayout(5,1));
-
-    public FormRPNCalc() {
-        setLayout(new BorderLayout());
-        setTitle("RPN Calculator v0.1");
-
-        // create buttons for all five rows and add them to the keypad container
+    public Keypad(Layout layout) {
+        super(layout);
         keypadRow1();
         keypadRow2();
         keypadRow3();
         keypadRow4();
         keypadRow5();
 
-        // generate the display
-        createTempDisplay();
-
-        add(BorderLayout.NORTH, display);
-        add(BorderLayout.CENTER, keypad);
-    }
-
-    public void updateDisplay() {
-        // functions copied from the lecture video
-//        setRow(tRegisterRow, "T:", calc.getT());
-//        setRow(zRegisterRow, "Z:", calc.getZ());
-//        setRow(yRegisterRow, "Y:", calc.getY());
-//        setRow(xRegisterRow, "X:", calc.getX());
+        this.addAll(sci1, num2, num3, num4, num5);
     }
 
     public void keypadRow1() {
@@ -68,8 +42,6 @@ public class FormRPNCalc extends Form {
 
         // Set border around top 10 buttons
         sci1.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.YELLOW));
-
-        keypad.add(sci1);
     }
 
     public void keypadRow2() {
@@ -84,8 +56,6 @@ public class FormRPNCalc extends Form {
 
         // Set border around second row
         num2.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.MAGENTA));
-
-        keypad.add(num2);
     }
 
     public void keypadRow3() {
@@ -100,8 +70,6 @@ public class FormRPNCalc extends Form {
 
         // Set border around third row
         num3.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.BLUE));
-
-        keypad.add(num3);
     }
 
     public void keypadRow4() {
@@ -116,8 +84,6 @@ public class FormRPNCalc extends Form {
 
         // Set border around third row
         num4.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.CYAN));
-
-        keypad.add(num4);
     }
 
     public void keypadRow5() {
@@ -132,23 +98,6 @@ public class FormRPNCalc extends Form {
 
         // Set border around third row
         num5.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN));
-
-        keypad.add(num5);
-    }
-
-    public void createTempDisplay() {
-        // just display text for the registers until logic can update calc
-        Label tRegister = new Label("T: ");
-        tRegisterRow.add(tRegister);
-        Label zRegister = new Label("Z: ");
-        zRegisterRow.add(zRegister);
-        Label yRegister = new Label("Y: ");
-        yRegisterRow.add(yRegister);
-        Label xRegister = new Label("X: ");
-        xRegisterRow.add(xRegister);
-
-        // add RegisterRows to the display container
-        display.addAll(tRegisterRow, zRegisterRow, yRegisterRow, xRegisterRow);
     }
 
     public Button numberButton(String text) {
