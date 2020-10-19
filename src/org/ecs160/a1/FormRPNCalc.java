@@ -63,16 +63,8 @@ public class FormRPNCalc extends Form {
         Button bSQRT = scienceButton("sqrt");
         Button bPi = scienceButton("pi");
         Button bE = scienceButton("E");
-        sci1.add(bSin);
-        sci1.add(bCos);
-        sci1.add(bTan);
-        sci1.add(bLog);
-        sci1.add(bLn);
-        sci1.add(bX2);
-        sci1.add(bX3);
-        sci1.add(bSQRT);
-        sci1.add(bPi);
-        sci1.add(bE);
+
+        sci1.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE);
 
         // Set border around top 10 buttons
         sci1.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.YELLOW));
@@ -86,12 +78,9 @@ public class FormRPNCalc extends Form {
         Button b7 = numberButton("7");
         Button b8 = numberButton("8");
         Button b9 = numberButton("9");
-        Button bSlash = operationButton("/");
-        num2.add(bPop);
-        num2.add(b7);
-        num2.add(b8);
-        num2.add(b9);
-        num2.add(bSlash);
+        Button bSlash = operatorButton("/");
+
+        num2.addAll(bPop, b7, b8, b9, bSlash);
 
         // Set border around second row
         num2.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.MAGENTA));
@@ -105,12 +94,9 @@ public class FormRPNCalc extends Form {
         Button b4 = numberButton("4");
         Button b5 = numberButton("5");
         Button b6 = numberButton("6");
-        Button bStar = operationButton("*");
-        num3.add(bClear);
-        num3.add(b4);
-        num3.add(b5);
-        num3.add(b6);
-        num3.add(bStar);
+        Button bStar = operatorButton("*");
+
+        num3.addAll(bClear, b4, b5, b6, bStar);
 
         // Set border around third row
         num3.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.BLUE));
@@ -124,12 +110,9 @@ public class FormRPNCalc extends Form {
         Button b1 = numberButton("1");
         Button b2 = numberButton("2");
         Button b3 = numberButton("3");
-        Button bMinus = operationButton("-");
-        num4.add(bBack);
-        num4.add(b1);
-        num4.add(b2);
-        num4.add(b3);
-        num4.add(bMinus);
+        Button bMinus = operatorButton("-");
+
+        num4.addAll(bBack, b1, b2, b3, bMinus);
 
         // Set border around third row
         num4.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.CYAN));
@@ -142,13 +125,10 @@ public class FormRPNCalc extends Form {
         Button bEnter = otherButton("ENT");
         Button b0 = numberButton("0");
         Button bDecimal = numberButton(".");
-        Button bYX = operationButton("Y^X");
-        Button bPlus = operationButton("+");
-        num5.add(bEnter);
-        num5.add(b0);
-        num5.add(bDecimal);
-        num5.add(bYX);
-        num5.add(bPlus);
+        Button bYX = operatorButton("Y^X");
+        Button bPlus = operatorButton("+");
+
+        num5.addAll(bEnter, b0, bDecimal, bYX, bPlus);
 
         // Set border around third row
         num5.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN));
@@ -168,10 +148,7 @@ public class FormRPNCalc extends Form {
         xRegisterRow.add(xRegister);
 
         // add RegisterRows to the display container
-        display.add(tRegisterRow);
-        display.add(zRegisterRow);
-        display.add(yRegisterRow);
-        display.add(xRegisterRow);
+        display.addAll(tRegisterRow, zRegisterRow, yRegisterRow, xRegisterRow);
     }
 
     public Button numberButton(String text) {
@@ -182,13 +159,8 @@ public class FormRPNCalc extends Form {
         bNum.getUnselectedStyle().setBgColor(ColorUtil.LTGRAY);
         bNum.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
 
-        // can add selectedStyle for when button is pressed
-        // otherwise it defaults to white BG with light blue text
-
-        bNum.getAllStyles().setMargin(Component.TOP, 50);
-        bNum.getAllStyles().setMargin(Component.RIGHT, 20);
-        bNum.getAllStyles().setMargin(Component.LEFT, 20);
-        bNum.getAllStyles().setMargin(Component.BOTTOM, 50);
+        // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
+        bNum.getAllStyles().setMargin(50, 50, 20, 20); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
 
         return bNum;
     }
@@ -201,13 +173,8 @@ public class FormRPNCalc extends Form {
         bSci.getUnselectedStyle().setBgColor(ColorUtil.GREEN);
         bSci.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
 
-        // can add selectedStyle for when button is pressed
-        // otherwise it defaults to white BG with light blue text
-
-        bSci.getAllStyles().setMargin(Component.TOP, 50);
-        bSci.getAllStyles().setMargin(Component.RIGHT, 20);
-        bSci.getAllStyles().setMargin(Component.LEFT, 20);
-        bSci.getAllStyles().setMargin(Component.BOTTOM, 50);
+        // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
+        bSci.getAllStyles().setMargin(50, 50, 20, 20); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
 
         return bSci;
     }
@@ -220,32 +187,22 @@ public class FormRPNCalc extends Form {
         bOther.getUnselectedStyle().setBgColor(ColorUtil.BLUE);
         bOther.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
 
-        // can add selectedStyle for when button is pressed
-        // otherwise it defaults to white BG with light blue text
-
-        bOther.getAllStyles().setMargin(Component.TOP, 50);
-        bOther.getAllStyles().setMargin(Component.RIGHT, 20);
-        bOther.getAllStyles().setMargin(Component.LEFT, 20);
-        bOther.getAllStyles().setMargin(Component.BOTTOM, 50);
+        // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
+        bOther.getAllStyles().setMargin(50, 50, 20, 20); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
 
         return bOther;
     }
 
-    public Button operationButton(String text) {
-        // give style to the other buttons (not numbers)
+    public Button operatorButton(String text) {
+        // give style to operator buttons
         Button bOperation = new Button(text);
 
         bOperation.getUnselectedStyle().setBgTransparency(255);
         bOperation.getUnselectedStyle().setBgColor(ColorUtil.GRAY);
         bOperation.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
 
-        // can add selectedStyle for when button is pressed
-        // otherwise it defaults to white BG with light blue text
-
-        bOperation.getAllStyles().setMargin(Component.TOP, 50);
-        bOperation.getAllStyles().setMargin(Component.RIGHT, 20);
-        bOperation.getAllStyles().setMargin(Component.LEFT, 20);
-        bOperation.getAllStyles().setMargin(Component.BOTTOM, 50);
+        // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
+        bOperation.getAllStyles().setMargin(50, 50, 20, 20); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
 
         return bOperation;
     }
