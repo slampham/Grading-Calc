@@ -19,12 +19,13 @@ public class Display extends Container {
     public void createTempDisplay() {
         // just display text for the registers until logic can update calc
         Label tRegister = new Label("T: ");
-        tRegisterRow.add(tRegister);
         Label zRegister = new Label("Z: ");
-        zRegisterRow.add(zRegister);
         Label yRegister = new Label("Y: ");
-        yRegisterRow.add(yRegister);
         Label xRegister = new Label("X: ");
+
+        tRegisterRow.add(tRegister);
+        zRegisterRow.add(zRegister);
+        yRegisterRow.add(yRegister);
         xRegisterRow.add(xRegister);
 
         // add RegisterRows to the display container
