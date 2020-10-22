@@ -27,7 +27,7 @@ public class Keypad extends Container {
         keypadRow5();
 
         Container[] key_rows = {sci1, num2, num3, num4, num5};
-        this.addAll(key_rows);
+        this.addAll(key_rows); // Keypad Container adds all key rows
 
 //        TESTING CODE FOR EVENT LISENERS FOR ALL BUTTONS.
 //        ArrayList<Button> buttons = new ArrayList<>();
@@ -186,6 +186,7 @@ public class Keypad extends Container {
         return bOperation;
     }
 
+    /*  TODO: IF ANY BUTTON PRESSED, IT SHOULD UPDATE DISPLAY. CURRENTLY ONLY CHANGES CALC STACK ATM */
     public void digitOrDecimalPressed(Button[] buttons) {
         for (Button button : buttons) {
             button.addActionListener(evt -> calc.digitOrDecimal(button));
