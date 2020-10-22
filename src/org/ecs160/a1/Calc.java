@@ -12,7 +12,7 @@ public class Calc {
     static Stack<Double> stack = new Stack<>();
 
     // CURRENT ENTRY ON CALC DISPLAY. The first line displayed where you enter numbers
-    String X = ""; // Keep as string to add on digit / period
+    String X = "";  // Keep as string to add on digit / period
 
     boolean operator_last_pressed = false;
     boolean enter_last_pressed = false;
@@ -45,7 +45,7 @@ public class Calc {
         return registers;
     }
 
-    public void digitOrPeriod(char c) {
+    public void digitOrDecimal(Button button) {
         if (operator_last_pressed) {
             pushStack(X);
             X = "";
@@ -54,7 +54,7 @@ public class Calc {
             X = "";
         }
 
-        X += c; // Concatenate digits pressed
+        X += button.getText(); // Concatenate digits pressed
         operator_last_pressed = enter_last_pressed = false;
     }
 
@@ -63,7 +63,7 @@ public class Calc {
         enter_last_pressed = true;
     }
 
-    public void oneOperandOrConst(Button button) {
+    public void unaryOpOrConst(Button button) {
         double X_double = Double.parseDouble(X);
 
         switch (button.getText()) {
@@ -76,7 +76,7 @@ public class Calc {
         operator_last_pressed = true;
     }
 
-    public void twoOperands(Button button) {
+    public void binaryOp(Button button) {
         double Y = stack.pop();
         double result = Float.NEGATIVE_INFINITY; // Keep as -inf in case something bad happened and no cases matched
         double X_double = Double.parseDouble(X);

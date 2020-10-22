@@ -58,6 +58,9 @@ public class Keypad extends Container {
 
         // Set border around second row
         num2.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.MAGENTA));
+
+        Button[] digits = new Button[] {b7, b8, b9};
+        digitOrDecimalPressed(digits);
     }
 
     public void keypadRow3() {
@@ -72,6 +75,9 @@ public class Keypad extends Container {
 
         // Set border around third row
         num3.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.BLUE));
+
+        Button[] digits = new Button[] {b4, b5, b6};
+        digitOrDecimalPressed(digits);
     }
 
     public void keypadRow4() {
@@ -84,8 +90,11 @@ public class Keypad extends Container {
 
         num4.addAll(bBack, b1, b2, b3, bMinus);
 
-        // Set border around third row
+        // Set border around 4th row
         num4.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.CYAN));
+
+        Button[] digits = new Button[] {b1, b2, b3};
+        digitOrDecimalPressed(digits);
     }
 
     public void keypadRow5() {
@@ -98,8 +107,11 @@ public class Keypad extends Container {
 
         num5.addAll(bEnter, b0, bDecimal, bYX, bPlus);
 
-        // Set border around third row
+        // Set border around 5th row
         num5.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN));
+
+        Button[] digits = new Button[] {b0, bDecimal};
+        digitOrDecimalPressed(digits);
     }
 
     public Button numberButton(String text) {
@@ -156,5 +168,23 @@ public class Keypad extends Container {
         bOperation.getAllStyles().setMargin(50, 50, 20, 20); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
 
         return bOperation;
+    }
+
+    public void digitOrDecimalPressed(Button[] buttons) {
+        for (Button button : buttons) {
+            button.addActionListener(evt -> calc.digitOrDecimal(button));
+        }
+    }
+
+    public void unaryOpOrConstPressed(Button[] buttons) {
+        for (Button button : buttons) {
+            button.addActionListener(evt -> calc.unaryOpOrConst(button));
+        }
+    }
+
+    public void binaryOpPressed(Button[] buttons) {
+        for (Button button : buttons) {
+            button.addActionListener(evt -> calc.binaryOp(button));
+        }
     }
 }
