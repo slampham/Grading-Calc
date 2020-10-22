@@ -12,7 +12,7 @@ public class Calc {
     static Stack<Double> stack = new Stack<>();
 
     // CURRENT ENTRY ON CALC DISPLAY. The first line displayed where you enter numbers
-    String X = "";  // Keep as string to add on digit / period
+    String X = "0";  // Keep as string to add on digit / period
 
     boolean operator_last_pressed = false;
     boolean enter_last_pressed = false;
@@ -38,7 +38,8 @@ public class Calc {
         Iterator<Double> iter = stack.iterator();
         double[] registers = new double[NUM_REGISTERS_DISPLAYED];
 
-        for (int i = 0; i < NUM_REGISTERS_DISPLAYED; ++i) {
+        registers[0] = Double.parseDouble(X);
+        for (int i = 1; i < NUM_REGISTERS_DISPLAYED; ++i) {
             registers[i] = iter.next();
         }
 

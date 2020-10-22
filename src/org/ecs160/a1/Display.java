@@ -11,21 +11,18 @@ public class Display extends Container {
     Container yRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
     Container xRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
 
+    Label tRegister = new Label("T: ");
+    Label zRegister = new Label("Z: ");
+    Label yRegister = new Label("Y: ");
+    Label xRegister = new Label("X: ");
+
     Calc calc = new Calc();
 
     public Display(Layout layout) {
         super(layout);
-        updateDisplay();
-    }
 
-    public void updateDisplay() {
         // just display text for the registers until logic can update calc
         double[] registers = calc.getRegisters();
-
-        Label tRegister = new Label("T: " + registers[3]);
-        Label zRegister = new Label("Z: " + registers[2]);
-        Label yRegister = new Label("Y: " + registers[1]);
-        Label xRegister = new Label("X: " + registers[0]);
 
         tRegisterRow.add(tRegister);
         zRegisterRow.add(zRegister);
@@ -34,5 +31,17 @@ public class Display extends Container {
 
         // add RegisterRows to the display container
         this.addAll(tRegisterRow, zRegisterRow, yRegisterRow, xRegisterRow);
+    }
+
+    public void updateDisplay() {
+        /* TODO: NEED HELP WITH UPDATING DISPLAY WHEN A KEY IS PRESSED. FOR EXAMPLE:
+        * if '2' is pressed, class Keypad should call updateDisplay(). However, I'm having
+        * trouble understanding how to do that.
+        * */
+
+        tRegister.setText("T: ");
+        zRegister.setText("Z: ");
+        yRegister.setText("Y: ");
+        xRegister.setText("X: ");
     }
 }

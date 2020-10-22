@@ -6,6 +6,8 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Border;
 
+import java.util.ArrayList;
+
 public class Keypad extends Container {
     // five containers to populate keypad
     Container sci1 = new Container(new GridLayout(2,5));
@@ -24,7 +26,21 @@ public class Keypad extends Container {
         keypadRow4();
         keypadRow5();
 
-        this.addAll(sci1, num2, num3, num4, num5);
+        Container[] key_rows = {sci1, num2, num3, num4, num5};
+        this.addAll(key_rows);
+
+//        TESTING CODE FOR EVENT LISENERS FOR ALL BUTTONS.
+//        ArrayList<Button> buttons = new ArrayList<>();
+//        for (Container row : key_rows) {
+//            for (Component comp : row) {
+//                if (comp instanceof Button) {
+//                    buttons.add((Button) comp);
+//                }
+//            }
+//        }
+//        for (Button button : buttons) {
+//            button.addActionListener(evt -> Display.updateDisplay());
+//        }
     }
 
     public void keypadRow1() {
