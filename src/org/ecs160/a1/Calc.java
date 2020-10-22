@@ -2,50 +2,104 @@ package org.ecs160.a1;
 
 import com.codename1.ui.Button;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 public class Calc {
-    Stack<Double> stack = new Stack<Double>();
-    String cur_entry = ""; // Keep as string to allow more digit to be added
+    final static int NUM_ZEROS_INITIAL = 10;
+    final static int NUM_REGISTERS_DISPLAYED = 4;
 
-    public void digitOrPeriodPressed(char c) {
-        cur_entry += c;
+    Stack<Double> stack = new Stack<>();
+
+    // CURRENT ENTRY ON CALC DISPLAY. The first line displayed where you enter numbers
+    String X = ""; // Keep as string to add on digit / period
+
+    boolean operator_last_pressed = false;
+    boolean enter_last_pressed = false;
+
+    public Calc() {
+        for (int i = 0; i < NUM_ZEROS_INITIAL; ++i) {
+            pushStack("0");
+        }
     }
 
-    public void enterPressed() {
-        if (cur_entry.equals(".") || cur_entry.isEmpty()) {
+    public void pushStack(String num) {
+        /* Use this function over stack.push() because you have to deal with user
+        * sometimes entering without any number */
+        if (num.equals(".") || num.isEmpty()) {
             stack.push(0.);
         }
         else {
-            stack.push(Double.parseDouble(cur_entry)); // Enter entry into stack
+            stack.push(Double.parseDouble(num)); // Enter entry into stack
         }
-
-        cur_entry = ""; // Clear entry
     }
 
-    public void operatorPressed(Button button) {
-        double x = stack.pop();
-        double y = stack.pop();
+    public double[] getXYZTVals() {
+        Iterator<Double> iter = stack.iterator();
+        double[] registers = new double[NUM_REGISTERS_DISPLAYED];
+
+        for (int i = 0; i < NUM_REGISTERS_DISPLAYED; ++i) {
+            registers[i] = iter.next();
+        }
+
+        return registers;
+    }
+
+    public void digitOrPeriod(char c) {
+        if (operator_last_pressed) {
+            pushStack(X);
+            X = "";
+        }
+        else if (enter_last_pressed) {
+            X = "";
+        }
+
+        X += c; // Concatenate digits pressed
+        operator_last_pressed = enter_last_pressed = false;
+    }
+
+    public void enter() {
+        pushStack(X);
+        enter_last_pressed = true;
+    }
+
+    public void oneOperandOrConst(Button button) {
+        double X_double = Double.parseDouble(X);
+
+        switch (button.getText()) {
+            case "log":
+                X_double = Math.log(X_double);
+                break;
+        }
+
+        X = String.valueOf(X_double);
+        operator_last_pressed = true;
+    }
+
+    public void twoOperands(Button button) {
+        double Y = stack.pop();
         double result = Float.NEGATIVE_INFINITY; // Keep as -inf in case something bad happened and no cases matched
+        double X_double = Double.parseDouble(X);
 
         switch (button.getText()) {
             case "/":
-                result = y / x;
+                result = Y / X_double;
                 break;
             case "*":
-                result = y * x;
+                result = Y * X_double;
                 break;
             case "-":
-
+                result = Y - X_double;
                 break;
             case "+":
-
+                result = Y + X_double;
                 break;
             case "Y^X":
-
+                result = Math.pow(Y, X_double);
                 break;
         }
 
-        stack.push(result);
+        X = String.valueOf(result);
+        operator_last_pressed = true;
     }
 }
