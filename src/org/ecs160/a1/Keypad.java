@@ -14,6 +14,8 @@ public class Keypad extends Container {
     Container num4 = new Container(new GridLayout(1, 5));
     Container num5 = new Container(new GridLayout(1, 5));
 
+    Calc calc = new Calc();
+
     public Keypad(Layout layout) {
         super(layout);
         keypadRow1();

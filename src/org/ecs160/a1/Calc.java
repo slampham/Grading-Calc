@@ -9,7 +9,7 @@ public class Calc {
     final static int NUM_ZEROS_INITIAL = 10;
     final static int NUM_REGISTERS_DISPLAYED = 4;
 
-    Stack<Double> stack = new Stack<>();
+    static Stack<Double> stack = new Stack<>();
 
     // CURRENT ENTRY ON CALC DISPLAY. The first line displayed where you enter numbers
     String X = ""; // Keep as string to add on digit / period
@@ -34,7 +34,7 @@ public class Calc {
         }
     }
 
-    public double[] getXYZTVals() {
+    public double[] getRegisters() {
         Iterator<Double> iter = stack.iterator();
         double[] registers = new double[NUM_REGISTERS_DISPLAYED];
 
