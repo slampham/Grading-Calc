@@ -116,7 +116,10 @@ public class Keypad extends Container {
         num4.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.CYAN));
 
         Button[] digits = new Button[] {b1, b2, b3};
+        Button[] binary_ops = new Button[] {bMinus};
+        bBack.addActionListener(evt -> calc.backspace());
         digitOrDecimalPressed(digits);
+        binaryOpPressed(binary_ops);
     }
 
     public void keypadRow5() {
@@ -128,12 +131,16 @@ public class Keypad extends Container {
         Button bPlus = operatorButton("+");
 
         num5.addAll(bEnter, b0, bDecimal, bYX, bPlus);
-
-        // Set border around 5th row
-        num5.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN));
+        num5.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN)); // Set border around 5th row
 
         Button[] digits = new Button[] {b0, bDecimal};
+        Button[] unary_ops = new Button[] {bYX};
+        Button[] binary_ops = new Button[] {bPlus};
+
         digitOrDecimalPressed(digits);
+        unaryOpOrConstPressed(unary_ops);
+        binaryOpPressed(binary_ops);
+        bEnter.addActionListener(evt -> calc.enter());
     }
 
     public Button numberButton(String text) {

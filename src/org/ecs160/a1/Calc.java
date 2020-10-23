@@ -36,12 +36,10 @@ public class Calc {
 
     public double[] getRegisters() {
         /* Return values in the registers displayed */
-        Iterator<Double> iter = stack.iterator();
         double[] registers = new double[NUM_REGISTERS_DISPLAYED];
 
-        registers[0] = Double.parseDouble(X);
-        for (int i = 1; i < NUM_REGISTERS_DISPLAYED; ++i) {
-            registers[i] = iter.next();
+        for(int i = stack.size() - 1, j = 0; j < NUM_REGISTERS_DISPLAYED; --i, ++j){
+            registers[j] = stack.get(i);
         }
 
         return registers;
@@ -64,6 +62,12 @@ public class Calc {
     public void enter() {
         pushStack(X);
         enter_last_pressed = true;
+    }
+
+    public void backspace() {
+        if (!X.isEmpty()) {
+            X = X.substring(0, X.length() - 1);
+        }
     }
 
     public void unaryOpOrConst(Button button) {
