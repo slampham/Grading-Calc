@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Keypad extends Container {
     // five containers to populate keypad
-    Container sci1 = new Container(new GridLayout(2,5));
+    Container sci1 = new Container(new GridLayout(3,5));
     Container num2 = new Container(new GridLayout(1, 5));
     Container num3 = new Container(new GridLayout(1, 5));
     Container num4 = new Container(new GridLayout(1, 5));
@@ -56,7 +56,13 @@ public class Keypad extends Container {
         Button bPi = scienceButton("pi");
         Button bE = scienceButton("E");
 
-        sci1.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE);
+        Button lists = scienceButton("lists");
+        Button store = scienceButton("store");
+        Button root = scienceButton("root");
+        Button bell = scienceButton("bell");
+        Button undo = scienceButton("undo");
+
+        sci1.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE, lists, store, root, bell, undo);
 
         // Set border around top 10 buttons
         sci1.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.YELLOW));
@@ -153,7 +159,7 @@ public class Keypad extends Container {
         bSci.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
 
         // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
-        bSci.getAllStyles().setMargin(50, 50, 20, 20); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
+        bSci.getAllStyles().setMargin(25, 25, 15, 15); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
 
         return bSci;
     }
