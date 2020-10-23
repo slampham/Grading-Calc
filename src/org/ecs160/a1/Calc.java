@@ -23,7 +23,7 @@ public class Calc {
         }
     }
 
-    public void pushStack(String num) {
+    private void pushStack(String num) {
         /* Use this function over stack.push() because you have to deal with user
         * sometimes entering without any number */
         if (num.equals(".") || num.isEmpty()) {

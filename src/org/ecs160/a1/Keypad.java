@@ -16,10 +16,14 @@ public class Keypad extends Container {
     Container num4 = new Container(new GridLayout(1, 5));
     Container num5 = new Container(new GridLayout(1, 5));
 
-    Calc calc = new Calc();
+    Calc calc;
+    Display display;
 
-    public Keypad(Layout layout) {
+    public Keypad(Layout layout, Calc calc, Display display) {
         super(layout);
+        this.calc = calc;
+        this.display = display;
+
         keypadRow1();
         keypadRow2();
         keypadRow3();
@@ -29,18 +33,14 @@ public class Keypad extends Container {
         Container[] key_rows = {sci1, num2, num3, num4, num5};
         this.addAll(key_rows); // Keypad Container adds all key rows
 
-//        TESTING CODE FOR EVENT LISENERS FOR ALL BUTTONS.
-//        ArrayList<Button> buttons = new ArrayList<>();
-//        for (Container row : key_rows) {
-//            for (Component comp : row) {
-//                if (comp instanceof Button) {
-//                    buttons.add((Button) comp);
-//                }
-//            }
-//        }
-//        for (Button button : buttons) {
-//            button.addActionListener(evt -> Display.updateDisplay());
-//        }
+        // TESTING CODE FOR EVENT LISENERS FOR ALL BUTTONS.
+        for (Container row : key_rows) {
+            for (Component comp : row) {
+                if (comp instanceof Button) {
+                    ((Button) comp).addActionListener(evt -> display.update());
+                }
+            }
+        }
     }
 
     public void keypadRow1() {
@@ -56,13 +56,13 @@ public class Keypad extends Container {
         Button bPi = scienceButton("pi");
         Button bE = scienceButton("E");
 
-        Button lists = scienceButton("lists");
-        Button store = scienceButton("store");
+        Button store = scienceButton("sto");
+        Button recall = scienceButton("rcl");
         Button root = scienceButton("root");
         Button bell = scienceButton("bell");
         Button undo = scienceButton("undo");
 
-        sci1.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE, lists, store, root, bell, undo);
+        sci1.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE, store, recall, root, bell, undo);
 
         // Set border around top 10 buttons
         sci1.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.YELLOW));
