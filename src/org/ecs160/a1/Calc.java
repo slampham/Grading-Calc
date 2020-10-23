@@ -2,7 +2,6 @@ package org.ecs160.a1;
 
 import com.codename1.ui.Button;
 
-import java.util.Iterator;
 import java.util.Stack;
 
 public class Calc {
@@ -77,7 +76,8 @@ public class Calc {
         switch (button.getText()) {
             case "log":
                 X_double = Math.log(X_double);
-                break;
+		break;
+	    case "sin":
             // TODO: add rest of cases
         }
 

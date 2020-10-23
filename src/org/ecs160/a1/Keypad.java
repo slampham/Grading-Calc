@@ -33,14 +33,18 @@ public class Keypad extends Container {
         Container[] key_rows = {sci1, num2, num3, num4, num5};
         this.addAll(key_rows); // Keypad Container adds all key rows
 
-        // TESTING CODE FOR EVENT LISENERS FOR ALL BUTTONS.
-        for (Container row : key_rows) {
-            for (Component comp : row) {
-                if (comp instanceof Button) {
-                    ((Button) comp).addActionListener(evt -> display.update());
-                }
-            }
-        }
+        /* FIXME: Would have been easy to add action listeners to every button. However, I realized
+           that the ORDER of action listeners matter, meaning that calc.function() would
+           occur AFTER the display.update(). That means the display updates BEFORE the actual
+           calculation. Does anyone know how to fix this? */
+
+//        for (Container row : key_rows) {
+//            for (Component comp : row) {
+//                if (comp instanceof Button) {
+//                    ((Button) comp).addActionListener(evt -> display.update());
+//                }
+//            }
+//        }
     }
 
     public void keypadRow1() {
@@ -66,6 +70,11 @@ public class Keypad extends Container {
 
         // Set border around top 10 buttons
         sci1.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.YELLOW));
+
+        recall.addActionListener(
+                evt -> {
+                    display.viewLists();
+                });
     }
 
     public void keypadRow2() {
@@ -140,7 +149,7 @@ public class Keypad extends Container {
         digitOrDecimalPressed(digits);
         unaryOpOrConstPressed(unary_ops);
         binaryOpPressed(binary_ops);
-        bEnter.addActionListener(evt -> calc.enter());
+        enterPressed(bEnter);
     }
 
     public Button numberButton(String text) {
@@ -202,19 +211,41 @@ public class Keypad extends Container {
     /*  TODO: IF ANY BUTTON PRESSED, IT SHOULD UPDATE DISPLAY. CURRENTLY ONLY CHANGES CALC STACK ATM */
     public void digitOrDecimalPressed(Button[] buttons) {
         for (Button button : buttons) {
-            button.addActionListener(evt -> calc.digitOrDecimal(button));
+            button.addActionListener(
+                    evt -> {
+                        calc.digitOrDecimal(button);
+                        display.update();
+                    }
+            );
         }
     }
 
     public void unaryOpOrConstPressed(Button[] buttons) {
         for (Button button : buttons) {
-            button.addActionListener(evt -> calc.unaryOpOrConst(button));
+            button.addActionListener(
+                    evt -> {
+                        calc.unaryOpOrConst(button);
+                        display.update();
+                    });
         }
     }
 
     public void binaryOpPressed(Button[] buttons) {
         for (Button button : buttons) {
-            button.addActionListener(evt -> calc.binaryOp(button));
+            button.addActionListener(
+                    evt -> {
+                        calc.binaryOp(button);
+                        display.update();
+                    });
         }
+    }
+
+    public void enterPressed(Button enter) {
+        enter.addActionListener(
+                    evt -> {
+                        calc.enter();
+                        display.update();
+                    }
+        );
     }
 }
