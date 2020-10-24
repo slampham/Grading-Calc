@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 public class Keypad extends Container {
     // five containers to populate keypad
-    Container sci1 = new Container(new GridLayout(3,5));
+    Container sci0 = new Container(new GridLayout(2,5));
+    Container sci1 = new Container(new GridLayout(2,5));
     Container num2 = new Container(new GridLayout(1, 5));
     Container num3 = new Container(new GridLayout(1, 5));
     Container num4 = new Container(new GridLayout(1, 5));
@@ -24,13 +25,14 @@ public class Keypad extends Container {
         this.calc = calc;
         this.display = display;
 
+        keypadRow0();
         keypadRow1();
         keypadRow2();
         keypadRow3();
         keypadRow4();
         keypadRow5();
 
-        Container[] key_rows = {sci1, num2, num3, num4, num5};
+        Container[] key_rows = {sci0, sci1, num2, num3, num4, num5};
         this.addAll(key_rows); // Keypad Container adds all key rows
 
         /* FIXME: Would have been easy to add action listeners to every button. However, I realized
@@ -48,6 +50,27 @@ public class Keypad extends Container {
     }
 
     public void keypadRow1() {
+        Button store = scienceButton("sto");
+        Button recall = scienceButton("rcl");
+        Button root = scienceButton("root");
+        Button bell = scienceButton("bell");
+        Button undo = scienceButton("undo");
+
+        Button exit = scienceButton("exit");
+        Button plusminus = scienceButton("+/-");
+        Button info = scienceButton("info");
+        Button overX = scienceButton("1/x");
+        Button yX = scienceButton("y^x");
+
+        sci1.addAll(exit, plusminus, info, overX, yX, store, recall, root, bell, undo);
+
+        recall.addActionListener(
+                evt -> {
+                    display.viewLists();
+                });
+    }
+
+    public void keypadRow0() {
         // Create the 1st row of the keypad (2 rows of 5 buttons)
         Button bSin = scienceButton("sin");
         Button bCos = scienceButton("cos");
@@ -60,21 +83,10 @@ public class Keypad extends Container {
         Button bPi = scienceButton("pi");
         Button bE = scienceButton("E");
 
-        Button store = scienceButton("sto");
-        Button recall = scienceButton("rcl");
-        Button root = scienceButton("root");
-        Button bell = scienceButton("bell");
-        Button undo = scienceButton("undo");
-
-        sci1.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE, store, recall, root, bell, undo);
+        sci0.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE);
 
         // Set border around top 10 buttons
-        sci1.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.YELLOW));
-
-        recall.addActionListener(
-                evt -> {
-                    display.viewLists();
-                });
+        sci0.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.YELLOW));
     }
 
     public void keypadRow2() {

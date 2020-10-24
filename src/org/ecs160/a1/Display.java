@@ -4,11 +4,6 @@ import com.codename1.ui.*;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.Layout;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 public class Display extends Container {
     // four containers to populate display
     Container tRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -34,7 +29,6 @@ public class Display extends Container {
 
         this.addAll(tRegisterRow, zRegisterRow, yRegisterRow, xRegisterRow); // Add registers to Display Container
         this.update();
-        this.viewLists();
     }
 
     public void update() {
