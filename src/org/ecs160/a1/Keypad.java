@@ -64,10 +64,9 @@ public class Keypad extends Container {
 
         sci1.addAll(exit, plusminus, info, overX, yX, store, recall, root, bell, undo);
 
-        recall.addActionListener(
-                evt -> {
-                    display.viewLists();
-                });
+        recall.addActionListener(evt -> {
+            display.viewLists();
+        });
     }
 
     public void keypadRow0() {
@@ -223,41 +222,35 @@ public class Keypad extends Container {
     /*  TODO: IF ANY BUTTON PRESSED, IT SHOULD UPDATE DISPLAY. CURRENTLY ONLY CHANGES CALC STACK ATM */
     public void digitOrDecimalPressed(Button[] buttons) {
         for (Button button : buttons) {
-            button.addActionListener(
-                    evt -> {
-                        calc.digitOrDecimal(button);
-                        display.update();
-                    }
-            );
+            button.addActionListener(evt -> {
+                calc.digitOrDecimal(button);
+                display.update();
+            });
         }
     }
 
     public void unaryOpOrConstPressed(Button[] buttons) {
         for (Button button : buttons) {
-            button.addActionListener(
-                    evt -> {
-                        calc.unaryOpOrConst(button);
-                        display.update();
-                    });
+            button.addActionListener(evt -> {
+                calc.unaryOpOrConst(button);
+                display.update();
+            });
         }
     }
 
     public void binaryOpPressed(Button[] buttons) {
         for (Button button : buttons) {
-            button.addActionListener(
-                    evt -> {
-                        calc.binaryOp(button);
-                        display.update();
-                    });
+            button.addActionListener(evt -> {
+                calc.binaryOp(button);
+                display.update();
+            });
         }
     }
 
     public void enterPressed(Button enter) {
-        enter.addActionListener(
-                    evt -> {
-                        calc.enter();
-                        display.update();
-                    }
-        );
+        enter.addActionListener(evt -> {
+            calc.enter();
+            display.update();
+        });
     }
 }
