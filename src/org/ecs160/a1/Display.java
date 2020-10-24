@@ -35,10 +35,10 @@ public class Display extends Container {
         /* Get registers after doing button press, and update display */
         double[] registers = calc.getRegisters();
 
-        tRegister.setText("T: " + registers[3]);
-        zRegister.setText("Z: " + registers[2]);
-        yRegister.setText("Y: " + registers[1]);
-        xRegister.setText("X: " + registers[0]);
+        tRegister.setText("T: " + registers[2]);
+        zRegister.setText("Z: " + registers[1]);
+        yRegister.setText("Y: " + registers[0]);
+        xRegister.setText("X: " + calc.X);
 
         this.revalidate();
     }

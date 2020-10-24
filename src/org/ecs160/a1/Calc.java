@@ -11,7 +11,7 @@ public class Calc {
     static Stack<Double> stack = new Stack<>();
 
     // CURRENT ENTRY ON CALC DISPLAY. The first line displayed where you enter numbers
-    String X = "0";  // Keep as string to add on digit / period.
+    String X = "";  // Keep as string to add on digit / period.
 
     boolean operator_last_pressed = false;
     boolean enter_last_pressed = false;
@@ -76,10 +76,10 @@ public class Calc {
         switch (button.getText()) {
             case "log":
                 X_double = Math.log(X_double);
-		break;
-	    case "sin":
-            // TODO: add rest of cases
-        }
+            break;
+            case "sin":
+                // TODO: add rest of cases
+            }
 
         X = String.valueOf(X_double);
         operator_last_pressed = true;
