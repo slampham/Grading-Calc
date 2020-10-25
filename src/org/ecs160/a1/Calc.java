@@ -17,7 +17,7 @@ public class Calc {
     boolean enter_last_pressed = false;
 
     public List<Double> rootCurve(int a) {
-        List<Double> nums = new ArrayList(stack);
+        List<Double> nums = new ArrayList(stack); // convert global var 'stack' into array
         Collections.reverse(nums);
 
         /* TODO: curve nums using root curve. 'a' is parameter *********************/
@@ -26,12 +26,24 @@ public class Calc {
     }
 
     public List<Double> bellCurve() {
-        List<Double> nums = new ArrayList(stack);
+        List<Double> nums = new ArrayList(stack); // convert global var 'stack' into array
         Collections.reverse(nums);
 
         /* TODO: curve nums using bell curve. **************************************/
 
         return nums;
+    }
+
+    public void storeStack() {
+        /* TODO: MAKE DATA PERSISTENT (maybe save into file?) */
+
+        // store global variable 'stack'
+    }
+
+    public void loadStack() {
+        /* TODO: MAKE DATA PERSISTENT (maybe load stack from file) */
+
+        // load data into global variable 'stack'
     }
 
     public Calc() {
