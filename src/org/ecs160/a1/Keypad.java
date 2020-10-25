@@ -35,18 +35,13 @@ public class Keypad extends Container {
         Container[] key_rows = {sci0, sci1, num2, num3, num4, num5};
         this.addAll(key_rows); // Keypad Container adds all key rows
 
-        /* FIXME: Would have been easy to add action listeners to every button. However, I realized
-           that the ORDER of action listeners matter, meaning that calc.function() would
-           occur AFTER the display.update(). That means the display updates BEFORE the actual
-           calculation. Does anyone know how to fix this? */
-
-//        for (Container row : key_rows) {
-//            for (Component comp : row) {
-//                if (comp instanceof Button) {
-//                    ((Button) comp).addActionListener(evt -> display.update());
-//                }
-//            }
-//        }
+        for (Container row : key_rows) {
+            for (Component comp : row) {
+                if (comp instanceof Button) {
+                    ((Button) comp).addActionListener(evt -> display.update());
+                }
+            }
+        }
     }
 
     public void keypadRow1() {
@@ -63,10 +58,6 @@ public class Keypad extends Container {
         Button yX = scienceButton("y^x");
 
         sci1.addAll(exit, plusminus, info, overX, yX, store, recall, root, bell, undo);
-
-        recall.addActionListener(evt -> {
-            display.viewLists();
-        });
     }
 
     public void keypadRow0() {
@@ -101,8 +92,8 @@ public class Keypad extends Container {
         // Set border around second row
         num2.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.MAGENTA));
 
-        Button[] digits = new Button[] {b7, b8, b9};
-        digitOrDecimalPressed(digits);
+        digitOrDecimalPressed(new Button[] {b7, b8, b9});
+        binaryOpPressed(new Button[] {bSlash});
     }
 
     public void keypadRow3() {
@@ -118,8 +109,9 @@ public class Keypad extends Container {
         // Set border around third row
         num3.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.BLUE));
 
-        Button[] digits = new Button[] {b4, b5, b6};
-        digitOrDecimalPressed(digits);
+        digitOrDecimalPressed(new Button[] {b4, b5, b6});
+        unaryOpOrConstPressed(new Button[] {bClear});
+        binaryOpPressed(new Button[] {bStar});
     }
 
     public void keypadRow4() {
@@ -135,11 +127,11 @@ public class Keypad extends Container {
         // Set border around 4th row
         num4.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.CYAN));
 
-        Button[] digits = new Button[] {b1, b2, b3};
-        Button[] binary_ops = new Button[] {bMinus};
-        bBack.addActionListener(evt -> calc.backspace());
-        digitOrDecimalPressed(digits);
-        binaryOpPressed(binary_ops);
+        bBack.addActionListener(evt -> {
+            calc.backspace();
+        });
+        digitOrDecimalPressed(new Button[] {b1, b2, b3});
+        binaryOpPressed(new Button[] {bMinus});
     }
 
     public void keypadRow5() {
@@ -153,13 +145,9 @@ public class Keypad extends Container {
         num5.addAll(bEnter, b0, bDecimal, bYX, bPlus);
         num5.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN)); // Set border around 5th row
 
-        Button[] digits = new Button[] {b0, bDecimal};
-        Button[] unary_ops = new Button[] {bYX};
-        Button[] binary_ops = new Button[] {bPlus};
-
-        digitOrDecimalPressed(digits);
-        unaryOpOrConstPressed(unary_ops);
-        binaryOpPressed(binary_ops);
+        digitOrDecimalPressed(new Button[] {b0, bDecimal});
+        unaryOpOrConstPressed(new Button[] {bYX});
+        binaryOpPressed(new Button[] {bPlus});
         enterPressed(bEnter);
     }
 
@@ -224,7 +212,6 @@ public class Keypad extends Container {
         for (Button button : buttons) {
             button.addActionListener(evt -> {
                 calc.digitOrDecimal(button);
-                display.update();
             });
         }
     }
@@ -233,7 +220,6 @@ public class Keypad extends Container {
         for (Button button : buttons) {
             button.addActionListener(evt -> {
                 calc.unaryOpOrConst(button);
-                display.update();
             });
         }
     }
@@ -242,7 +228,6 @@ public class Keypad extends Container {
         for (Button button : buttons) {
             button.addActionListener(evt -> {
                 calc.binaryOp(button);
-                display.update();
             });
         }
     }
@@ -250,7 +235,6 @@ public class Keypad extends Container {
     public void enterPressed(Button enter) {
         enter.addActionListener(evt -> {
             calc.enter();
-            display.update();
         });
     }
 }

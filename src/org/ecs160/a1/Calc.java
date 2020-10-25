@@ -2,7 +2,7 @@ package org.ecs160.a1;
 
 import com.codename1.ui.Button;
 
-import java.util.Stack;
+import java.util.*;
 
 public class Calc {
     final static int NUM_ZEROS_INITIAL = 10; // When initializing stack, it starts off with this many zeroes
@@ -15,6 +15,24 @@ public class Calc {
 
     boolean operator_last_pressed = false;
     boolean enter_last_pressed = false;
+
+    public List<Double> rootCurve(int a) {
+        List<Double> nums = new ArrayList(stack);
+        Collections.reverse(nums);
+
+        /* TODO: curve nums using root curve. 'a' is parameter *********************/
+
+        return nums;
+    }
+
+    public List<Double> bellCurve() {
+        List<Double> nums = new ArrayList(stack);
+        Collections.reverse(nums);
+
+        /* TODO: curve nums using bell curve. **************************************/
+
+        return nums;
+    }
 
     public Calc() {
         for (int i = 0; i < NUM_ZEROS_INITIAL; ++i) {
@@ -37,7 +55,7 @@ public class Calc {
         /* Return values in the registers displayed */
         double[] registers = new double[NUM_REGISTERS_DISPLAYED];
 
-        for(int i = stack.size() - 1, j = 0; j < NUM_REGISTERS_DISPLAYED; --i, ++j){
+        for (int i = stack.size() - 1, j = 0; j < NUM_REGISTERS_DISPLAYED && j < stack.size(); --i, ++j){
             registers[j] = stack.get(i);
         }
 
@@ -76,10 +94,24 @@ public class Calc {
         switch (button.getText()) {
             case "log":
                 X_double = Math.log(X_double);
-            break;
+                break;
             case "sin":
-                // TODO: add rest of cases
-            }
+                X_double = Math.sin(X_double);
+                break;
+            case "cos":
+                X_double = Math.cos(X_double);
+                break;
+            case "tan":
+                X_double = Math.tan(X_double);
+                break;
+            case "x^2":
+                X_double = Math.pow(X_double, 2);
+                break;
+            case "e^x":
+                X_double = Math.exp(X_double);
+                break;
+	    }
+
 
         X = String.valueOf(X_double);
         operator_last_pressed = true;
@@ -87,9 +119,13 @@ public class Calc {
 
     public void binaryOp(Button button) {
         /* Ex: *, +, - */
-        double Y = stack.pop();
+        if (stack.size() <= 0) { // Error: if nothing on stack
+            return;
+        }
+
         double result = Float.NEGATIVE_INFINITY; // Keep as -inf in case something bad happened and no cases matched
         double X_double = Double.parseDouble(X);
+        double Y = stack.pop();
 
         switch (button.getText()) {
             case "/":
@@ -107,7 +143,7 @@ public class Calc {
             case "Y^X":
                 result = Math.pow(Y, X_double);
                 break;
-            // TODO: add rest of cases
+            // TODO: add rest of cases *******************************************
         }
 
         X = String.valueOf(result);
