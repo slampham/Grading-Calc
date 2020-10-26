@@ -92,6 +92,9 @@ public class Keypad extends Container {
         // Set border around second row
         num2.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.MAGENTA));
 
+        bPop.addActionListener(evt -> {
+            calc.pop();
+        });
         digitOrDecimalPressed(new Button[] {b7, b8, b9});
         binaryOpPressed(new Button[] {bSlash});
     }
