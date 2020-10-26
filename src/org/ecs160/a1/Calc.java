@@ -19,9 +19,15 @@ public class Calc {
     public List<Double> rootCurve(int a) {
         List<Double> nums = new ArrayList(stack); // convert global var 'stack' into array
         Collections.reverse(nums);
-
-        /* TODO: curve nums using root curve. 'a' is parameter *********************/
-
+	/* TODO: Test code. My simulation isnt working right now */
+	//Root Curve Function: F(X)=(100^(1-a))*(x^a)
+        double ans = 0.00;
+        double val = 0.00;
+        for (int i=0; i<nums.size(); i++) {
+            val =  nums.get(i);
+            ans = Math.pow(100, (1-a)) * Math.pow(val, a);
+            nums.set(i, ans);
+        }
         return nums;
     }
 
