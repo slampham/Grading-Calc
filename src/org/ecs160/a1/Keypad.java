@@ -78,6 +78,8 @@ public class Keypad extends Container {
         keypadRow4();
         keypadRow5();
 
+        buttonPressListeners();
+
         Container[] key_rows = {sci0, sci1, num2, num3, num4, num5};
         this.addAll(key_rows); // Keypad Container adds all key rows
 
@@ -92,13 +94,6 @@ public class Keypad extends Container {
 
     public void keypadRow1() {
         sci1.addAll(exit, plusminus, info, overX, yX, store, recall, root, bell, undo);
-
-        recall.addActionListener(evt -> {
-            display.viewLists();
-        });
-        exit.addActionListener(evt -> {
-            display.viewRegisters();
-        });
     }
 
     public void keypadRow0() {
@@ -115,12 +110,6 @@ public class Keypad extends Container {
 
         // Set border around second row
         num2.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.MAGENTA));
-
-        bPop.addActionListener(evt -> {
-            calc.pop();
-        });
-        digitOrDecimalPressed(new Button[] {b7, b8, b9});
-        binaryOpPressed(new Button[] {bSlash});
     }
 
     public void keypadRow3() {
@@ -129,10 +118,6 @@ public class Keypad extends Container {
 
         // Set border around third row
         num3.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.BLUE));
-
-        digitOrDecimalPressed(new Button[] {b4, b5, b6});
-        unaryOpOrConstPressed(new Button[] {bClear});
-        binaryOpPressed(new Button[] {bStar});
     }
 
     public void keypadRow4() {
@@ -141,23 +126,34 @@ public class Keypad extends Container {
 
         // Set border around 4th row
         num4.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.CYAN));
-
-        bBack.addActionListener(evt -> {
-            calc.backspace();
-        });
-        digitOrDecimalPressed(new Button[] {b1, b2, b3});
-        binaryOpPressed(new Button[] {bMinus});
     }
 
     public void keypadRow5() {
         // Create the 5th row of the keypad (5 buttons)
         num5.addAll(bEnter, b0, bDecimal, bYX, bPlus);
         num5.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN)); // Set border around 5th row
+    }
 
-        digitOrDecimalPressed(new Button[] {b0, bDecimal});
-        unaryOpOrConstPressed(new Button[] {bYX});
-        binaryOpPressed(new Button[] {bPlus});
-        enterPressed(bEnter);
+    public void buttonPressListeners() {
+        digitOrDecimalPressed(new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, bDecimal});
+        unaryOpOrConstPressed(new Button[] {bClear});
+        binaryOpPressed(new Button[] {bMinus, bSlash, bStar, bYX, bPlus});
+
+        recall.addActionListener(evt -> {
+            display.viewLists();
+        });
+        exit.addActionListener(evt -> {
+            display.viewRegisters();
+        });
+        bPop.addActionListener(evt -> {
+            calc.pop();
+        });
+        bBack.addActionListener(evt -> {
+            calc.backspace();
+        });
+        bEnter.addActionListener(evt -> {
+            calc.enter();
+        });
     }
 
     public void digitOrDecimalPressed(Button[] buttons) {
@@ -182,11 +178,5 @@ public class Keypad extends Container {
                 calc.binaryOp(button);
             });
         }
-    }
-
-    public void enterPressed(Button enter) {
-        enter.addActionListener(evt -> {
-            calc.enter();
-        });
     }
 }
