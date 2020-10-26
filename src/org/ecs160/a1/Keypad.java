@@ -6,8 +6,6 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Border;
 
-import java.util.ArrayList;
-
 public class Keypad extends Container {
     // five containers to populate keypad
     Container sci0 = new Container(new GridLayout(2,5));
@@ -36,9 +34,9 @@ public class Keypad extends Container {
         this.addAll(key_rows); // Keypad Container adds all key rows
 
         for (Container row : key_rows) {
-            for (Component comp : row) {
-                if (comp instanceof Button) {
-                    ((Button) comp).addActionListener(evt -> display.update());
+            for (Component comp : row) { // FIXME: code pretty ugly. Maybe easier way to add action listeners to all buttons? Or make different classes?
+                if (comp instanceof Button && !((Button) comp).getText().equals("rcl")) {
+                    ((Button) comp).addActionListener(evt -> display.viewRegisters());
                 }
             }
         }
@@ -58,6 +56,13 @@ public class Keypad extends Container {
         Button yX = scienceButton("y^x");
 
         sci1.addAll(exit, plusminus, info, overX, yX, store, recall, root, bell, undo);
+
+        recall.addActionListener(evt -> {
+            display.viewLists();
+        });
+        exit.addActionListener(evt -> {
+            display.viewRegisters();
+        });
     }
 
     public void keypadRow0() {

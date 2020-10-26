@@ -5,11 +5,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.Layout;
 
 public class Display extends Container {
-    // four containers to populate display
-    Container tRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
-    Container zRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
-    Container yRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
-    Container xRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
+    String mode = "viewRegisters";
 
     Label tRegister = new Label("T: ");
     Label zRegister = new Label("Z: ");
@@ -22,16 +18,22 @@ public class Display extends Container {
         super(layout);
         this.calc = calc;
 
+        // four containers to populate display
+        Container tRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        Container zRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        Container yRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        Container xRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
+
         tRegisterRow.add(tRegister);
         zRegisterRow.add(zRegister);
         yRegisterRow.add(yRegister);
         xRegisterRow.add(xRegister);
 
         this.addAll(tRegisterRow, zRegisterRow, yRegisterRow, xRegisterRow); // Add registers to Display Container
-        this.update();
+        this.viewRegisters();
     }
 
-    public void update() {
+    public void viewRegisters() {
         /* Get registers after doing button press, and update display */
         double[] registers = calc.getRegisters();
 
@@ -53,7 +55,7 @@ public class Display extends Container {
         this.revalidate();
     }
 
-    public void summary() {
+    public void viewSummary() {
         tRegister.setText("Grades: 8 Z's | 5 F's | 20 C's | 32 B's | 20 A's");
         zRegister.setText("Standard Deviation: 17");
         yRegister.setText("Min: 0 | Max: 97");

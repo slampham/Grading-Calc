@@ -2,15 +2,17 @@ package org.ecs160.a1;
 
 import com.codename1.ui.Button;
 
+import java.io.*;
 import java.util.*;
 
 public class Calc {
     final static int NUM_ZEROS_INITIAL = 10; // When initializing stack, it starts off with this many zeroes
     final static int NUM_REGISTERS_DISPLAYED = 4;
+    final static String lists_filename = "lists.txt";
 
     static Stack<Double> stack = new Stack<>();
+    static HashMap<Integer, Stack<Double>> lists;
 
-    // CURRENT ENTRY ON CALC DISPLAY. The first line displayed where you enter numbers
     String X = "";  // Keep as string to add on digit / period.
 
     boolean operator_last_pressed = false;
@@ -40,16 +42,16 @@ public class Calc {
         return nums;
     }
 
-    public void storeStack() {
-        /* TODO: MAKE DATA PERSISTENT (maybe save into file?) */
-
-        // store global variable 'stack'
+    public void storeStack(int register) throws IOException {
+        lists.put(register, stack);
+        ObjectOutputStream oos = new ObjectOutputStream(new FileWriter(lists_filename));
+        oos.writeObject(lists);
     }
 
-    public void loadStack() {
-        /* TODO: MAKE DATA PERSISTENT (maybe load stack from file) */
-
-        // load data into global variable 'stack'
+    public void loadStack() throws IOException {
+        ObjectInputStream ois = new ObjectInputStream(new FileReader(lists_filename));
+        Object o = ois.read();
+        lists = (HashMap<Integer, Stack<Double>>) o;
     }
 
     public Calc() {
