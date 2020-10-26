@@ -44,14 +44,14 @@ public class Calc {
 
     public void storeStack(int register) throws IOException {
         lists.put(register, stack);
-        ObjectOutputStream oos = new ObjectOutputStream(new FileWriter(lists_filename));
-        oos.writeObject(lists);
+//        ObjectOutputStream oos = new ObjectOutputStream(new FileWriter(lists_filename));
+//        oos.writeObject(lists);
     }
 
     public void loadStack() throws IOException {
-        ObjectInputStream ois = new ObjectInputStream(new FileReader(lists_filename));
-        Object o = ois.read();
-        lists = (HashMap<Integer, Stack<Double>>) o;
+//        ObjectInputStream ois = new ObjectInputStream(new FileReader(lists_filename));
+//        Object o = ois.read();
+//        lists = (HashMap<Integer, Stack<Double>>) o;
     }
 
     public Calc() {

@@ -6,7 +6,14 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Border;
 
+import java.util.ArrayList;
+
 public class Keypad extends Container {
+    ArrayList<Button> key_combo = new ArrayList<>();
+
+    Calc calc;
+    Display display;
+
     // five containers to populate keypad
     Container sci0 = new Container(new GridLayout(2,5));
     Container sci1 = new Container(new GridLayout(2,5));
@@ -15,8 +22,49 @@ public class Keypad extends Container {
     Container num4 = new Container(new GridLayout(1, 5));
     Container num5 = new Container(new GridLayout(1, 5));
 
-    Calc calc;
-    Display display;
+    Button store = new ScienceButton("sto");
+    Button recall = new ScienceButton("rcl");
+    Button root = new ScienceButton("root");
+    Button bell = new ScienceButton("bell");
+    Button undo = new ScienceButton("undo");
+    Button exit = new ScienceButton("exit");
+    Button plusminus = new ScienceButton("+/-");
+    Button info = new ScienceButton("info");
+    Button overX = new ScienceButton("1/x");
+    Button yX = new ScienceButton("y^x");
+    Button bSin = new ScienceButton("sin");
+    Button bCos = new ScienceButton("cos");
+    Button bTan = new ScienceButton("tan");
+    Button bLog = new ScienceButton("log");
+    Button bLn = new ScienceButton("ln");
+    Button bX2 = new ScienceButton("x^2");
+    Button bX3 = new ScienceButton("x^3");
+    Button bSQRT = new ScienceButton("sqrt");
+    Button bPi = new ScienceButton("pi");
+    Button bE = new ScienceButton("E");
+
+    Button bPop = new OtherButton("pop");
+    Button bClear = new OtherButton("CLR");
+    Button bBack = new OtherButton("<-");
+    Button bEnter = new OtherButton("ENT");
+
+    Button b0 = new NumberButton("0");
+    Button b1 = new NumberButton("1");
+    Button b2 = new NumberButton("2");
+    Button b3 = new NumberButton("3");
+    Button b4 = new NumberButton("4");
+    Button b5 = new NumberButton("5");
+    Button b6 = new NumberButton("6");
+    Button b7 = new NumberButton("7");
+    Button b8 = new NumberButton("8");
+    Button b9 = new NumberButton("9");
+    Button bDecimal = new NumberButton(".");
+
+    Button bYX = new OperatorButton("Y^X");
+    Button bPlus = new OperatorButton("+");
+    Button bStar = new OperatorButton("*");
+    Button bSlash = new OperatorButton("/");
+    Button bMinus = new OperatorButton("-");
 
     public Keypad(Layout layout, Calc calc, Display display) {
         super(layout);
@@ -43,18 +91,6 @@ public class Keypad extends Container {
     }
 
     public void keypadRow1() {
-        Button store = scienceButton("sto");
-        Button recall = scienceButton("rcl");
-        Button root = scienceButton("root");
-        Button bell = scienceButton("bell");
-        Button undo = scienceButton("undo");
-
-        Button exit = scienceButton("exit");
-        Button plusminus = scienceButton("+/-");
-        Button info = scienceButton("info");
-        Button overX = scienceButton("1/x");
-        Button yX = scienceButton("y^x");
-
         sci1.addAll(exit, plusminus, info, overX, yX, store, recall, root, bell, undo);
 
         recall.addActionListener(evt -> {
@@ -67,17 +103,6 @@ public class Keypad extends Container {
 
     public void keypadRow0() {
         // Create the 1st row of the keypad (2 rows of 5 buttons)
-        Button bSin = scienceButton("sin");
-        Button bCos = scienceButton("cos");
-        Button bTan = scienceButton("tan");
-        Button bLog = scienceButton("log");
-        Button bLn = scienceButton("ln");
-        Button bX2 = scienceButton("x^2");
-        Button bX3 = scienceButton("x^3");
-        Button bSQRT = scienceButton("sqrt");
-        Button bPi = scienceButton("pi");
-        Button bE = scienceButton("E");
-
         sci0.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE);
 
         // Set border around top 10 buttons
@@ -86,12 +111,6 @@ public class Keypad extends Container {
 
     public void keypadRow2() {
         // Create the 2nd row of the keypad (5 buttons)
-        Button bPop = otherButton("pop");
-        Button b7 = numberButton("7");
-        Button b8 = numberButton("8");
-        Button b9 = numberButton("9");
-        Button bSlash = operatorButton("/");
-
         num2.addAll(bPop, b7, b8, b9, bSlash);
 
         // Set border around second row
@@ -106,12 +125,6 @@ public class Keypad extends Container {
 
     public void keypadRow3() {
         // Create the 3rd row of the keypad (5 buttons)
-        Button bClear = otherButton("CLR");
-        Button b4 = numberButton("4");
-        Button b5 = numberButton("5");
-        Button b6 = numberButton("6");
-        Button bStar = operatorButton("*");
-
         num3.addAll(bClear, b4, b5, b6, bStar);
 
         // Set border around third row
@@ -124,12 +137,6 @@ public class Keypad extends Container {
 
     public void keypadRow4() {
         // Create the 4th row of the keypad (5 buttons)
-        Button bBack = otherButton("<-");
-        Button b1 = numberButton("1");
-        Button b2 = numberButton("2");
-        Button b3 = numberButton("3");
-        Button bMinus = operatorButton("-");
-
         num4.addAll(bBack, b1, b2, b3, bMinus);
 
         // Set border around 4th row
@@ -144,12 +151,6 @@ public class Keypad extends Container {
 
     public void keypadRow5() {
         // Create the 5th row of the keypad (5 buttons)
-        Button bEnter = otherButton("ENT");
-        Button b0 = numberButton("0");
-        Button bDecimal = numberButton(".");
-        Button bYX = operatorButton("Y^X");
-        Button bPlus = operatorButton("+");
-
         num5.addAll(bEnter, b0, bDecimal, bYX, bPlus);
         num5.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN)); // Set border around 5th row
 
@@ -159,63 +160,6 @@ public class Keypad extends Container {
         enterPressed(bEnter);
     }
 
-    public Button numberButton(String text) {
-        // give style to the number buttons
-        Button bNum = new Button(text);
-
-        bNum.getUnselectedStyle().setBgTransparency(255);
-        bNum.getUnselectedStyle().setBgColor(ColorUtil.LTGRAY);
-        bNum.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
-
-        // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
-        bNum.getAllStyles().setMargin(50, 50, 20, 20); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
-
-        return bNum;
-    }
-
-    public Button scienceButton(String text) {
-        // give style to the number buttons
-        Button bSci = new Button(text);
-
-        bSci.getUnselectedStyle().setBgTransparency(255);
-        bSci.getUnselectedStyle().setBgColor(ColorUtil.GREEN);
-        bSci.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
-
-        // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
-        bSci.getAllStyles().setMargin(25, 25, 15, 15); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
-
-        return bSci;
-    }
-
-    public Button otherButton(String text) {
-        // give style to the other buttons (not numbers)
-        Button bOther = new Button(text);
-
-        bOther.getUnselectedStyle().setBgTransparency(255);
-        bOther.getUnselectedStyle().setBgColor(ColorUtil.BLUE);
-        bOther.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
-
-        // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
-        bOther.getAllStyles().setMargin(50, 50, 20, 20); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
-
-        return bOther;
-    }
-
-    public Button operatorButton(String text) {
-        // give style to operator buttons
-        Button bOperation = new Button(text);
-
-        bOperation.getUnselectedStyle().setBgTransparency(255);
-        bOperation.getUnselectedStyle().setBgColor(ColorUtil.GRAY);
-        bOperation.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
-
-        // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
-        bOperation.getAllStyles().setMargin(50, 50, 20, 20); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
-
-        return bOperation;
-    }
-
-    /*  TODO: IF ANY BUTTON PRESSED, IT SHOULD UPDATE DISPLAY. CURRENTLY ONLY CHANGES CALC STACK ATM */
     public void digitOrDecimalPressed(Button[] buttons) {
         for (Button button : buttons) {
             button.addActionListener(evt -> {
