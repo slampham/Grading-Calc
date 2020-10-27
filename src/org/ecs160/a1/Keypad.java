@@ -6,10 +6,8 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Border;
 
-import java.util.ArrayList;
-
 public class Keypad extends Container {
-    ArrayList<Button> key_combo = new ArrayList<>();
+    Button prev_key_pressed = null;
 
     Calc calc;
     Display display;
@@ -84,9 +82,12 @@ public class Keypad extends Container {
         this.addAll(key_rows); // Keypad Container adds all key rows
 
         for (Container row : key_rows) {
-            for (Component comp : row) { // FIXME: code pretty ugly. Maybe easier way to add action listeners to all buttons? Or make different classes?
-                if (comp instanceof Button && !((Button) comp).getText().equals("rcl")) {
-                    ((Button) comp).addActionListener(evt -> display.viewRegisters());
+            for (Component comp : row) {
+                if (comp instanceof Button) {
+                    ((Button) comp).addActionListener(evt -> {
+                        prev_key_pressed = (Button) comp;
+                        display.revalidate();
+                    });
                 }
             }
         }
@@ -143,16 +144,19 @@ public class Keypad extends Container {
             display.viewLists();
         });
         exit.addActionListener(evt -> {
-            display.viewRegisters();
+            display.updateRegisters();
         });
         bPop.addActionListener(evt -> {
             calc.pop();
+            display.updateRegisters();
         });
         bBack.addActionListener(evt -> {
             calc.backspace();
+            display.updateRegisters();
         });
         bEnter.addActionListener(evt -> {
             calc.enter();
+            display.updateRegisters();
         });
     }
 
@@ -160,6 +164,7 @@ public class Keypad extends Container {
         for (Button button : buttons) {
             button.addActionListener(evt -> {
                 calc.digitOrDecimal(button);
+                display.updateRegisters();
             });
         }
     }
@@ -168,6 +173,7 @@ public class Keypad extends Container {
         for (Button button : buttons) {
             button.addActionListener(evt -> {
                 calc.unaryOpOrConst(button);
+                display.updateRegisters();
             });
         }
     }
@@ -176,6 +182,7 @@ public class Keypad extends Container {
         for (Button button : buttons) {
             button.addActionListener(evt -> {
                 calc.binaryOp(button);
+                display.updateRegisters();
             });
         }
     }

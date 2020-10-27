@@ -30,10 +30,11 @@ public class Display extends Container {
         xRegisterRow.add(xRegister);
 
         this.addAll(tRegisterRow, zRegisterRow, yRegisterRow, xRegisterRow); // Add registers to Display Container
-        this.viewRegisters();
+        this.updateRegisters();
+        this.revalidate();
     }
 
-    public void viewRegisters() {
+    public void updateRegisters() {
         /* Get registers after doing button press, and update display */
         double[] registers = calc.getRegisters();
 
@@ -41,8 +42,6 @@ public class Display extends Container {
         zRegister.setText("Z: " + registers[1]);
         yRegister.setText("Y: " + registers[0]);
         xRegister.setText("X: " + calc.X);
-
-        this.revalidate();
     }
     
     public void viewLists() {
@@ -51,8 +50,6 @@ public class Display extends Container {
         zRegister.setText("RCL 1:   41   40   39    2   81   11   46   53   42   77");
         yRegister.setText("RCL 2:   37   12   96   32   99   87   72   30   27");
         xRegister.setText("RCL 3:   73   60    8   79   52   23  100   24 ");
-
-        this.revalidate();
     }
 
     public void viewSummary() {
@@ -60,7 +57,5 @@ public class Display extends Container {
         zRegister.setText("Standard Deviation: 17");
         yRegister.setText("Min: 0 | Max: 97");
         xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");
-
-        this.revalidate();
     }
 }

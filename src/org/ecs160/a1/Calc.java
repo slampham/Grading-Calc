@@ -11,7 +11,7 @@ public class Calc {
     final static String lists_filename = "lists.txt";
 
     static Stack<Double> stack = new Stack<>();
-    static HashMap<Integer, Stack<Double>> lists;
+    HashMap<String, Stack<Double>> lists;
 
     String X = "";  // Keep as string to add on digit / period.
 
@@ -42,7 +42,7 @@ public class Calc {
         return nums;
     }
 
-    public void storeStack(int register) throws IOException {
+    public void storeStack(String register) throws IOException {
         lists.put(register, stack);
 //        ObjectOutputStream oos = new ObjectOutputStream(new FileWriter(lists_filename));
 //        oos.writeObject(lists);
