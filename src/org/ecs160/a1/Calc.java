@@ -52,9 +52,12 @@ public class Calc {
     public List<Double> bellCurve() {
         List<Double> nums = new ArrayList(stack); // convert global var 'stack' into array
         Collections.reverse(nums);
-
         /* TODO: curve nums using bell curve. **************************************/
-
+	double val = 0.00;
+        for (Double num : nums) {
+            val += num;
+        }
+        double mean = val/nums.size();
         return nums;
     }
 
