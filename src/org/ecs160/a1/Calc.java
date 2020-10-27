@@ -29,6 +29,9 @@ public class Calc {
             }
             storeLists();
         }
+        else {
+            loadLists();
+        }
     }
 
     public List<Double> rootCurve(int a) {
@@ -77,7 +80,7 @@ public class Calc {
         }
     }
 
-    public void loadStack() { // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
+    public void loadLists() { // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
         try {
             FileInputStream fis = new FileInputStream(new File(lists_filename));
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -95,6 +98,10 @@ public class Calc {
         catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void loadList(String register) {
+        stack = lists.get(register);
     }
 
     private void pushStack(String num) {

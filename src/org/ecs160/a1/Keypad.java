@@ -86,7 +86,7 @@ public class Keypad extends Container {
                 if (comp instanceof Button) {
                     ((Button) comp).addActionListener(evt -> {
                         prev_key_pressed = (Button) comp;
-                        display.revalidate();
+                        display.revalidate(); // FIXME: maybe synch issues? Hence, some button presses wont work
                     });
                 }
             }
@@ -173,7 +173,7 @@ public class Keypad extends Container {
         for (Button button : buttons) {
             button.addActionListener(evt -> {
                 if (prev_key_pressed == recall) {
-                    // TODO: recall list from calc.lists
+                    calc.loadList(button.getText());
                 }
                 else {
                     calc.digitOrDecimal(button);

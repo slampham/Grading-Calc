@@ -4,6 +4,9 @@ import com.codename1.ui.*;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.Layout;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class Display extends Container {
     String mode = "viewRegisters";
 
@@ -57,5 +60,14 @@ public class Display extends Container {
         zRegister.setText("Standard Deviation: 17");
         yRegister.setText("Min: 0 | Max: 97");
         xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");
+    }
+
+    public ArrayList<Double> stackToList(Stack<Double> stack) {
+        ArrayList<Double> list = new ArrayList<>();
+        for (int i = stack.size() - 1; i >= 0; --i) {
+            list.add(stack.get(i));
+        }
+
+        return list;
     }
 }
