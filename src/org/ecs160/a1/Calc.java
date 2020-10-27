@@ -27,7 +27,7 @@ public class Calc {
             for (int i = 0; i < NUM_LISTS; ++i) {
                 lists.put(String.valueOf(i), stack); // FIXME: not sure if clone is necessary?
             }
-            storeStack("0");
+            storeLists();
         }
     }
 
@@ -57,7 +57,10 @@ public class Calc {
 
     public void storeStack(String register) { // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
         lists.put(register, stack);
+        storeLists();
+    }
 
+    public void storeLists() {
         try {
             FileOutputStream fos = new FileOutputStream(new File(lists_filename));
             ObjectOutputStream oos = new ObjectOutputStream(fos);
