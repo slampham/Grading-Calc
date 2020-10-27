@@ -12,7 +12,7 @@ public class Calc {
     final static String lists_filename = "lists.txt";
 
     static Stack<Double> stack = new Stack<>();
-    HashMap<String, Stack<Double>> lists;
+    HashMap<String, Stack<Double>> lists = new HashMap<>();
     boolean operator_last_pressed = false;
     boolean enter_last_pressed = false;
     String X = "";  // Keep as string to add on digit / period.
@@ -22,12 +22,13 @@ public class Calc {
             pushStack("0");
         }
 
-//        File list_file = new File(lists_filename);
-//        if (!list_file.isDirectory()) { // If file containing lists do not exist (ie no previous session)
-//            for (int i = 0; i < NUM_LISTS; ++i) {
-//                lists.put(String.valueOf(i), (Stack<Double>) stack.clone());
-//            }
-//        }
+        File list_file = new File(lists_filename);
+        if (!list_file.isDirectory()) { // If file containing lists do not exist (ie no previous session)
+            for (int i = 0; i < NUM_LISTS; ++i) {
+                lists.put(String.valueOf(i), stack); // FIXME: not sure if clone is necessary?
+            }
+            storeStack("0");
+        }
     }
 
     public List<Double> rootCurve(int a) {
