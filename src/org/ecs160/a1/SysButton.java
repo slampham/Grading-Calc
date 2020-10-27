@@ -3,8 +3,8 @@ package org.ecs160.a1;
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Button;
 
-public class OtherButton extends Button {
-    public OtherButton(String text) {
+public class SysButton extends Button {
+    public SysButton(String text) {
         super(text);
 
         this.getUnselectedStyle().setBgTransparency(255);

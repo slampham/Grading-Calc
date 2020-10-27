@@ -41,10 +41,10 @@ public class Keypad extends Container {
     Button bPi = new ScienceButton("pi");
     Button bE = new ScienceButton("E");
 
-    Button bPop = new OtherButton("pop");
-    Button bClear = new OtherButton("CLR");
-    Button bBack = new OtherButton("<-");
-    Button bEnter = new OtherButton("ENT");
+    Button bPop = new SysButton("pop");
+    Button bClear = new SysButton("CLR");
+    Button bBack = new SysButton("<-");
+    Button bEnter = new SysButton("ENT");
 
     Button b0 = new NumberButton("0");
     Button b1 = new NumberButton("1");
@@ -136,34 +136,49 @@ public class Keypad extends Container {
     }
 
     public void buttonPressListeners() {
-        digitOrDecimalPressed(new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, bDecimal});
+        digitPressed(new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8, b9});
         unaryOpOrConstPressed(new Button[] {bClear});
         binaryOpPressed(new Button[] {bMinus, bSlash, bStar, bYX, bPlus});
+
+        bDecimal.addActionListener(evt -> {
+            calc.digitOrDecimal(bDecimal);
+            display.updateRegisters();
+        });
 
         recall.addActionListener(evt -> {
             display.viewLists();
         });
+
         exit.addActionListener(evt -> {
             display.updateRegisters();
         });
+
         bPop.addActionListener(evt -> {
             calc.pop();
             display.updateRegisters();
         });
+
         bBack.addActionListener(evt -> {
             calc.backspace();
             display.updateRegisters();
         });
+
         bEnter.addActionListener(evt -> {
             calc.enter();
             display.updateRegisters();
         });
     }
 
-    public void digitOrDecimalPressed(Button[] buttons) {
+    public void digitPressed(Button[] buttons) {
         for (Button button : buttons) {
             button.addActionListener(evt -> {
-                calc.digitOrDecimal(button);
+                if (prev_key_pressed == recall) {
+                    // TODO: recall list from calc.lists
+                }
+                else {
+                    calc.digitOrDecimal(button);
+                }
+
                 display.updateRegisters();
             });
         }

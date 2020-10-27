@@ -8,21 +8,33 @@ import java.util.*;
 public class Calc {
     final static int NUM_ZEROS_INITIAL = 10; // When initializing stack, it starts off with this many zeroes
     final static int NUM_REGISTERS_DISPLAYED = 4;
+    final static int NUM_LISTS = 4;
     final static String lists_filename = "lists.txt";
 
     static Stack<Double> stack = new Stack<>();
     HashMap<String, Stack<Double>> lists;
-
-    String X = "";  // Keep as string to add on digit / period.
-
     boolean operator_last_pressed = false;
     boolean enter_last_pressed = false;
+    String X = "";  // Keep as string to add on digit / period.
+
+    public Calc() {
+        for (int i = 0; i < NUM_ZEROS_INITIAL; ++i) {
+            pushStack("0");
+        }
+
+//        File list_file = new File(lists_filename);
+//        if (!list_file.isDirectory()) { // If file containing lists do not exist (ie no previous session)
+//            for (int i = 0; i < NUM_LISTS; ++i) {
+//                lists.put(String.valueOf(i), (Stack<Double>) stack.clone());
+//            }
+//        }
+    }
 
     public List<Double> rootCurve(int a) {
         List<Double> nums = new ArrayList(stack); // convert global var 'stack' into array
         Collections.reverse(nums);
-	/* TODO: Test code. My simulation isnt working right now */
-	//Root Curve Function: F(X)=(100^(1-a))*(x^a)
+        /* TODO: Test code. My simulation isnt working right now */
+        //Root Curve Function: F(X)=(100^(1-a))*(x^a)
         double ans = 0.00;
         double val = 0.00;
         for (int i=0; i<nums.size(); i++) {
@@ -42,21 +54,42 @@ public class Calc {
         return nums;
     }
 
-    public void storeStack(String register) throws IOException {
+    public void storeStack(String register) { // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
         lists.put(register, stack);
-//        ObjectOutputStream oos = new ObjectOutputStream(new FileWriter(lists_filename));
-//        oos.writeObject(lists);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(new File(lists_filename));
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(lists);
+
+            fos.close();
+            oos.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+        catch (IOException e) {
+            System.out.println("Error initializing stream");
+        }
     }
 
-    public void loadStack() throws IOException {
-//        ObjectInputStream ois = new ObjectInputStream(new FileReader(lists_filename));
-//        Object o = ois.read();
-//        lists = (HashMap<Integer, Stack<Double>>) o;
-    }
+    public void loadStack() { // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
+        try {
+            FileInputStream fis = new FileInputStream(new File(lists_filename));
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            lists = (HashMap<String, Stack<Double>>) ois.readObject();
 
-    public Calc() {
-        for (int i = 0; i < NUM_ZEROS_INITIAL; ++i) {
-            pushStack("0");
+            ois.close();
+            fis.close();
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+        catch (IOException e) {
+            System.out.println("Error initializing stream");
+        }
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -113,25 +146,19 @@ public class Calc {
 
         switch (button.getText()) {
             case "log":
-                X_double = Math.log(X_double);
-                break;
+                X_double = Math.log(X_double); break;
             case "sin":
-                X_double = Math.sin(X_double);
-                break;
+                X_double = Math.sin(X_double); break;
             case "cos":
-                X_double = Math.cos(X_double);
-                break;
+                X_double = Math.cos(X_double); break;
             case "tan":
-                X_double = Math.tan(X_double);
-                break;
+                X_double = Math.tan(X_double); break;
             case "x^2":
-                X_double = Math.pow(X_double, 2);
-                break;
+                X_double = Math.pow(X_double, 2); break;
             case "e^x":
-                X_double = Math.exp(X_double);
-                break;
+                X_double = Math.exp(X_double); break;
+                // TODO: add rest of comments
 	    }
-
 
         X = String.valueOf(X_double);
         operator_last_pressed = true;
@@ -149,20 +176,15 @@ public class Calc {
 
         switch (button.getText()) {
             case "/":
-                result = Y / X_double;
-                break;
+                result = Y / X_double; break;
             case "*":
-                result = Y * X_double;
-                break;
+                result = Y * X_double; break;
             case "-":
-                result = Y - X_double;
-                break;
+                result = Y - X_double; break;
             case "+":
-                result = Y + X_double;
-                break;
+                result = Y + X_double; break;
             case "Y^X":
-                result = Math.pow(Y, X_double);
-                break;
+                result = Math.pow(Y, X_double); break;
             // TODO: add rest of cases *******************************************
         }
 
@@ -229,6 +251,7 @@ public class Calc {
                 grade_distr.compute("Z", (k, v) -> v + 1);
             }
         }
+
         return grade_distr;
     }
 }
