@@ -77,8 +77,8 @@ public class Calc {
   public double[] flatCurve(double a) {
     double[] nums = reverse((Double[]) stack.toArray());
 
-    for (Double num : nums) {
-      num = num + a;
+    for (int i = 0; i < nums.length; i++) {
+      nums[i] += a;
     }
 
     return nums;
