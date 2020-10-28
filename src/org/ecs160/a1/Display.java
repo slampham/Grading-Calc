@@ -3,8 +3,10 @@ package org.ecs160.a1;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.Layout;
+import com.codename1.ui.list.ListModel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Stack;
 
 public class Display extends Container {
@@ -48,11 +50,13 @@ public class Display extends Container {
     }
     
     public void viewLists() {
-        // TODO: IMPLEMENT PERSISTENT STORAGE. 92, 62, 83, 92, 56, 100, 30
-        tRegister.setText("RCL 0:   4    5   18   21   63    0   28   76   16 ");
-        zRegister.setText("RCL 1:   41   40   39    2   81   11   46   53   42   77");
-        yRegister.setText("RCL 2:   37   12   96   32   99   87   72   30   27");
-        xRegister.setText("RCL 3:   73   60    8   79   52   23  100   24 ");
+        // TODO: still kind of buggy, not confirmed to work
+        Object[] lists = calc.stacks.values().toArray();
+
+        tRegister.setText("RCL 0:\t" + lists[0].toString());
+        zRegister.setText("RCL 1:\t" + lists[1].toString());
+        yRegister.setText("RCL 2:\t" + lists[2].toString());
+        xRegister.setText("RCL 3:\t" + lists[3].toString());
     }
 
     public void viewSummary() {
@@ -60,14 +64,5 @@ public class Display extends Container {
         zRegister.setText("Standard Deviation: 17");
         yRegister.setText("Min: 0 | Max: 97");
         xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");
-    }
-
-    public ArrayList<Double> stackToList(Stack<Double> stack) {
-        ArrayList<Double> list = new ArrayList<>();
-        for (int i = stack.size() - 1; i >= 0; --i) {
-            list.add(stack.get(i));
-        }
-
-        return list;
     }
 }

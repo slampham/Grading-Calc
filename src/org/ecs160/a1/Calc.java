@@ -3,6 +3,7 @@ package org.ecs160.a1;
 import com.codename1.ui.Button;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Calc {
@@ -12,7 +13,7 @@ public class Calc {
     final static String lists_filename = "lists.txt";
 
     static Stack<Double> stack = new Stack<>();
-    HashMap<String, Stack<Double>> lists = new HashMap<>();
+    HashMap<String, Stack<Double>> stacks = new HashMap<>();
     boolean operator_last_pressed = false;
     boolean enter_last_pressed = false;
     String X = "";  // Keep as string to add on digit / period.
@@ -25,7 +26,7 @@ public class Calc {
         File list_file = new File(lists_filename);
         if (!list_file.isDirectory()) { // If file containing lists do not exist (ie no previous session)
             for (int i = 0; i < NUM_LISTS; ++i) {
-                lists.put(String.valueOf(i), stack); // FIXME: not sure if clone is necessary?
+                stacks.put(String.valueOf(i), stack); // FIXME: not sure if clone is necessary?
             }
             storeLists();
         }
@@ -53,7 +54,7 @@ public class Calc {
         List<Double> nums = new ArrayList(stack); // convert global var 'stack' into array
         Collections.reverse(nums);
         /* TODO: curve nums using bell curve. **************************************/
-	double val = 0.00;
+        double val = 0.00;
         for (Double num : nums) {
             val += num;
         }
@@ -62,7 +63,7 @@ public class Calc {
     }
 
     public void storeStack(String register) { // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
-        lists.put(register, stack);
+        stacks.put(register, stack);
         storeLists();
     }
 
@@ -70,7 +71,7 @@ public class Calc {
         try {
             FileOutputStream fos = new FileOutputStream(new File(lists_filename));
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(lists);
+            oos.writeObject(stacks);
 
             fos.close();
             oos.close();
@@ -87,7 +88,7 @@ public class Calc {
         try {
             FileInputStream fis = new FileInputStream(new File(lists_filename));
             ObjectInputStream ois = new ObjectInputStream(fis);
-            lists = (HashMap<String, Stack<Double>>) ois.readObject();
+            stacks = (HashMap<String, Stack<Double>>) ois.readObject();
 
             ois.close();
             fis.close();
@@ -104,7 +105,7 @@ public class Calc {
     }
 
     public void loadList(String register) {
-        stack = lists.get(register);
+        stack = stacks.get(register);
     }
 
     private void pushStack(String num) {
