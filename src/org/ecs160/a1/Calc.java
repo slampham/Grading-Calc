@@ -3,11 +3,10 @@ package org.ecs160.a1;
 import com.codename1.ui.Button;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Calc {
-    final static int NUM_ZEROS_INITIAL = 10; // When initializing stack, it starts off with this many zeroes
+    final static int NUM_ZEROS_INITIAL = 4; // When initializing stack, it starts off with this many zeroes
     final static int NUM_REGISTERS_DISPLAYED = 4;
     final static int NUM_LISTS = 4;
     final static String lists_filename = "lists.txt";
@@ -26,7 +25,7 @@ public class Calc {
         File list_file = new File(lists_filename);
         if (!list_file.isDirectory()) { // If file containing lists do not exist (ie no previous session)
             for (int i = 0; i < NUM_LISTS; ++i) {
-                stacks.put(String.valueOf(i), stack); // FIXME: not sure if clone is necessary?
+                stacks.put(String.valueOf(i), (Stack<Double>) stack.clone()); // FIXME: not sure if clone is necessary?
             }
             storeLists();
         }
@@ -35,36 +34,43 @@ public class Calc {
         }
     }
 
-    public List<Double> rootCurve(int a) {
-        List<Double> nums = new ArrayList(stack); // convert global var 'stack' into array
-        Collections.reverse(nums);
-        /* TODO: Test code. My simulation isnt working right now */
-        //Root Curve Function: F(X)=(100^(1-a))*(x^a)
+    public Double[] rootCurve(int a) {
+        Double[] nums = (Double[]) stack.toArray(); // convert global var 'stack' into array
+        // FIXME: stack.toArray() creates vals backwards, but we can fix that later
+
+        // Root Curve Function: F(X)=(100^(1-a))*(x^a)
         double ans = 0.00;
         double val = 0.00;
-        for (int i=0; i<nums.size(); i++) {
-            val =  nums.get(i);
+        for (int i=0; i<nums.length; i++) {
+            val =  nums[i];
             ans = Math.pow(100, (1-a)) * Math.pow(val, a);
-            nums.set(i, ans);
+            nums[i] = ans;
         }
         return nums;
     }
 
-    public List<Double> bellCurve() {
-        List<Double> nums = new ArrayList(stack); // convert global var 'stack' into array
-        Collections.reverse(nums);
+    public Double[] bellCurve() {
+        Double[] nums = (Double[]) stack.toArray(); // convert global var 'stack' into array
+        // FIXME: stack.toArray() creates vals backwards, but we can fix that later
+
         /* TODO: curve nums using bell curve. **************************************/
         double val = 0.00;
         for (Double num : nums) {
             val += num;
         }
-        double mean = val/nums.size();
+        double mean = val/nums.length;
         return nums;
     }
 
-    public void storeStack(String register) { // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
+    public void storeList(String register) { // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
         stacks.put(register, stack);
         storeLists();
+    }
+
+    public void loadList(String register) {
+        loadLists();
+        stack = stacks.get(register);
+        X = "";
     }
 
     public void storeLists() {
@@ -104,9 +110,6 @@ public class Calc {
         }
     }
 
-    public void loadList(String register) {
-        stack = stacks.get(register);
-    }
 
     private void pushStack(String num) {
         /* Use this function over stack.push() because you have to deal with user

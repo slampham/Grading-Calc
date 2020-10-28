@@ -149,6 +149,10 @@ public class Keypad extends Container {
             display.viewLists();
         });
 
+        store.addActionListener(evt -> {
+            display.viewLists();
+        });
+
         exit.addActionListener(evt -> {
             display.updateRegisters();
         });
@@ -174,6 +178,9 @@ public class Keypad extends Container {
             button.addActionListener(evt -> {
                 if (prev_key_pressed == recall) {
                     calc.loadList(button.getText());
+                }
+                else if (prev_key_pressed == store) {
+                    calc.storeList(button.getText());
                 }
                 else {
                     calc.digitOrDecimal(button);

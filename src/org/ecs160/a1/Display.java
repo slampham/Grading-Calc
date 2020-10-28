@@ -3,10 +3,9 @@ package org.ecs160.a1;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.Layout;
-import com.codename1.ui.list.ListModel;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Stack;
 
 public class Display extends Container {
@@ -50,13 +49,13 @@ public class Display extends Container {
     }
     
     public void viewLists() {
-        // TODO: still kind of buggy, not confirmed to work
-        Object[] lists = calc.stacks.values().toArray();
+        // TODO: STILL BUGGY, NEED TO FIND WAY TO CLONE ARRAYS AND REVERSE
+//        List lists = calc.stacks.values().toArray(); // WARNING: stacks iterated in reverse order (ie bottom up)
 
-        tRegister.setText("RCL 0:\t" + lists[0].toString());
-        zRegister.setText("RCL 1:\t" + lists[1].toString());
-        yRegister.setText("RCL 2:\t" + lists[2].toString());
-        xRegister.setText("RCL 3:\t" + lists[3].toString());
+//        tRegister.setText("RCL 0:\t" + Arrays.toString(reverse(lists[0])));
+//        zRegister.setText("RCL 1:\t" + Arrays.toString(reverse(lists[1])));
+//        yRegister.setText("RCL 2:\t" + Arrays.toString(reverse(lists[2])));
+//        xRegister.setText("RCL 3:\t" + Arrays.toString(reverse(lists[3])));
     }
 
     public void viewSummary() {
@@ -64,5 +63,13 @@ public class Display extends Container {
         zRegister.setText("Standard Deviation: 17");
         yRegister.setText("Min: 0 | Max: 97");
         xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");
+    }
+
+    public static Double[] reverse(Stack<Double> stack) {
+        Double[] list = (Double[]) stack.toArray();
+        Double[] result = new Double[list.length];
+        System.arraycopy(list, 0, result, 0, list.length);
+        Collections.reverse(Arrays.asList(result));
+        return result;
     }
 }
