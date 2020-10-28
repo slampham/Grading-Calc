@@ -251,62 +251,52 @@ public class Calc {
     X = String.valueOf(stack.pop());
   }
 
-  public HashMap<String, Integer> gradeDistr(double[] grades) {
-    HashMap<String, Integer> grade_distr =
-        new HashMap<String, Integer>() {
-          {
-            put("A+", 0);
-            put("A", 0);
-            put("A-", 0);
-            put("B+", 0);
-            put("B", 0);
-            put("B-", 0);
-            put("C+", 0);
-            put("C", 0);
-            put("C-", 0);
-            put("D+", 0);
-            put("D", 0);
-            put("D-", 0);
-            put("F+", 0);
-            put("F", 0);
-            put("Z", 0);
-          }
-        };
+  public HashMap<String, Integer> gradeHistogram(double[] grades) {
+    HashMap<String, Integer> hist = new HashMap<>();
+    hist.put("A+", 0);
+    hist.put("A", 0);
+    hist.put("A-", 0);
+    hist.put("B+", 0);
+    hist.put("B", 0);
+    hist.put("B-", 0);
+    hist.put("C+", 0);
+    hist.put("C", 0);
+    hist.put("C-", 0);
+    hist.put("D+", 0);
+    hist.put("D", 0);
+    hist.put("D-", 0);
+    hist.put("F", 0);
 
     for (double grade : grades) {
-      if (97 <= grade) {
-        grade_distr.compute("A+", (k, v) -> v + 1);
-      } else if (93 <= grade && grade < 97) {
-        grade_distr.compute("A", (k, v) -> v + 1);
-      } else if (90 <= grade && grade < 93) {
-        grade_distr.compute("A-", (k, v) -> v + 1);
-      } else if (87 <= grade && grade < 90) {
-        grade_distr.compute("B+", (k, v) -> v + 1);
-      } else if (83 <= grade && grade < 87) {
-        grade_distr.compute("B", (k, v) -> v + 1);
-      } else if (80 <= grade && grade < 83) {
-        grade_distr.compute("B-", (k, v) -> v + 1);
-      } else if (77 <= grade && grade < 80) {
-        grade_distr.compute("C+", (k, v) -> v + 1);
-      } else if (73 <= grade && grade < 77) {
-        grade_distr.compute("C", (k, v) -> v + 1);
-      } else if (70 <= grade && grade < 73) {
-        grade_distr.compute("C-", (k, v) -> v + 1);
-      } else if (67 <= grade && grade < 70) {
-        grade_distr.compute("D+", (k, v) -> v + 1);
-      } else if (63 <= grade && grade < 67) {
-        grade_distr.compute("D", (k, v) -> v + 1);
-      } else if (60 <= grade && grade < 63) {
-        grade_distr.compute("D-", (k, v) -> v + 1);
-      } else if (57 <= grade && grade < 60) {
-        grade_distr.compute("F+", (k, v) -> v + 1);
-      } else if (.0001 <= grade && grade < 57) {
-        grade_distr.compute("F", (k, v) -> v + 1);
-      } else if (grade <= .0001) {
-        grade_distr.compute("Z", (k, v) -> v + 1);
+      if (grade >= 97) {
+        hist.compute("A+", (k, v) -> v + 1);
+      } else if (grade >= 93) {
+        hist.compute("A", (k, v) -> v + 1);
+      } else if (grade >= 90) {
+        hist.compute("A-", (k, v) -> v + 1);
+      } else if (grade >= 87) {
+        hist.compute("B+", (k, v) -> v + 1);
+      } else if (grade >= 83) {
+        hist.compute("B", (k, v) -> v + 1);
+      } else if (grade >= 80) {
+        hist.compute("B-", (k, v) -> v + 1);
+      } else if (grade >= 77) {
+        hist.compute("C+", (k, v) -> v + 1);
+      } else if (grade >= 73) {
+        hist.compute("C", (k, v) -> v + 1);
+      } else if (grade >= 70) {
+        hist.compute("C-", (k, v) -> v + 1);
+      } else if (grade >= 67) {
+        hist.compute("D+", (k, v) -> v + 1);
+      } else if (grade >= 63) {
+        hist.compute("D", (k, v) -> v + 1);
+      } else if (grade >= 60) {
+        hist.compute("D-", (k, v) -> v + 1);
+      } else {
+        hist.compute("F", (k, v) -> v + 1);
       }
     }
 
-    return grade_distr;
+    return hist;
   }
 }
