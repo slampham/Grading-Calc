@@ -48,11 +48,8 @@ public class Calc {
     double[] nums = reverse((Double[]) stack.toArray());
 
     // Root Curve Function: F(X)=(100^(1-a))*(x^a)
-    double ans = 0, val = 0;
     for (int i = 0; i < nums.length; i++) {
-      val = nums[i];
-      ans = Math.pow(100, (1 - a)) * Math.pow(val, a);
-      nums[i] = ans;
+      nums[i] = Math.pow(100, (1 - a)) * Math.pow(nums[i], a);
     }
 
     return nums;
