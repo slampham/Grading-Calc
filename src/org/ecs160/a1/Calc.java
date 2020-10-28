@@ -241,8 +241,14 @@ public class Calc {
   }
 
   public void pop() {
-    X = String.valueOf(stack.pop());
     operator_last_pressed = true;
+
+    if (stack.empty()) {
+      X = "0.0";
+      return;
+    }
+
+    X = String.valueOf(stack.pop());
   }
 
   public HashMap<String, Integer> gradeDistr(double[] grades) {
