@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -67,6 +68,8 @@ public class Calc {
 
   public double[] bellCurve() {
     double[] nums = reverse((Double[]) stack.toArray());
+    double mean = mean(nums);
+    double stddev = stddev(nums);
 
     /* TODO: curve nums using bell curve. **************************************/
     double val = 0, d2mean = 0, SD = 0;
@@ -79,6 +82,27 @@ public class Calc {
     }
     SD = Math.sqrt(d2mean / nums.length);
     return nums;
+  }
+
+  private double mean(double[] input) {
+    double sum = 0;
+
+    for (double v : input) {
+      sum += v;
+    }
+
+    return sum / input.length;
+  }
+
+  private double stddev(double[] input) {
+    double mean = mean(input);
+
+    double sum = 0;
+    for (double value : input) {
+      sum += Math.pow(value - mean, 2);
+    }
+
+    return Math.sqrt(sum / input.length);
   }
 
   private double[] reverse(Double[] input) {
