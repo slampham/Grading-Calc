@@ -44,9 +44,8 @@ public class Calc {
     }
   }
 
-  public Double[] rootCurve(double a) {
-    Double[] nums = (Double[]) stack.toArray(); // convert global var 'stack' into array
-    // FIXME: stack.toArray() creates vals backwards, but we can fix that later
+  public double[] rootCurve(double a) {
+    double[] nums = reverse((Double[]) stack.toArray());
 
     // Root Curve Function: F(X)=(100^(1-a))*(x^a)
     double ans = 0, val = 0;
@@ -55,12 +54,12 @@ public class Calc {
       ans = Math.pow(100, (1 - a)) * Math.pow(val, a);
       nums[i] = ans;
     }
+
     return nums;
   }
 
-  public Double[] bellCurve() {
-    Double[] nums = (Double[]) stack.toArray(); // convert global var 'stack' into array
-    // FIXME: stack.toArray() creates vals backwards, but we can fix that later
+  public double[] bellCurve() {
+    double[] nums = reverse((Double[]) stack.toArray());
 
     /* TODO: curve nums using bell curve. **************************************/
     double val = 0, d2mean = 0, SD = 0;
@@ -75,13 +74,22 @@ public class Calc {
     return nums;
   }
 
-  public Double[] flatCurve(double a) {
-    Double[] nums = (Double[]) stack.toArray(); // convert global var 'stack' into array
-    // FIXME: stack.toArray() creates vals backwards, but we can fix that later
+  public double[] flatCurve(double a) {
+    double[] nums = reverse((Double[]) stack.toArray());
+
     for (Double num : nums) {
       num = num + a;
     }
+
     return nums;
+  }
+
+  private double[] reverse(Double[] input) {
+    for (int i = 0; i < input.length / 2; i++) {
+      double temp = input[i];
+      input[i] = input[input.length - 1 - i];
+      input[input.length - 1 - i] = temp;
+    }
   }
 
   public void storeList(String register) {
