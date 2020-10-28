@@ -34,7 +34,7 @@ public class Calc {
         }
     }
 
-    public Double[] rootCurve(int a) {
+    public Double[] rootCurve(double a) {
         Double[] nums = (Double[]) stack.toArray(); // convert global var 'stack' into array
         // FIXME: stack.toArray() creates vals backwards, but we can fix that later
 
@@ -53,7 +53,7 @@ public class Calc {
         // FIXME: stack.toArray() creates vals backwards, but we can fix that later
 
         /* TODO: curve nums using bell curve. **************************************/
-        double val = 0.00;
+        double val = 0, d2mean = 0, SD = 0;
         for (Double num : nums) {
             val += num;
         }
@@ -62,6 +62,15 @@ public class Calc {
             d2mean += Math.pow((mean-num), 2);
         }
         SD = Math.sqrt(d2mean/nums.length);
+        return nums;
+    }
+
+    public Double[] flatCurve(double a) {
+        Double[] nums = (Double[]) stack.toArray(); // convert global var 'stack' into array
+        // FIXME: stack.toArray() creates vals backwards, but we can fix that later
+        for (Double num : nums) {
+            num = num + a;
+        }
         return nums;
     }
 
