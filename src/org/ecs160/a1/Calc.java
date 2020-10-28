@@ -39,8 +39,7 @@ public class Calc {
         // FIXME: stack.toArray() creates vals backwards, but we can fix that later
 
         // Root Curve Function: F(X)=(100^(1-a))*(x^a)
-        double ans = 0.00;
-        double val = 0.00;
+        double ans = 0, val = 0;
         for (int i=0; i<nums.length; i++) {
             val =  nums[i];
             ans = Math.pow(100, (1-a)) * Math.pow(val, a);
@@ -59,6 +58,10 @@ public class Calc {
             val += num;
         }
         double mean = val/nums.length;
+	for (Double num : nums) {
+            d2mean += Math.pow((mean-num), 2);
+        }
+        SD = Math.sqrt(d2mean/nums.length);
         return nums;
     }
 
