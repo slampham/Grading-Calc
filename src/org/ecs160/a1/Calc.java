@@ -55,6 +55,16 @@ public class Calc {
     return nums;
   }
 
+  public double[] flatCurve(double a) {
+    double[] nums = reverse((Double[]) stack.toArray());
+
+    for (int i = 0; i < nums.length; i++) {
+      nums[i] += a;
+    }
+
+    return nums;
+  }
+
   public double[] bellCurve() {
     double[] nums = reverse((Double[]) stack.toArray());
 
@@ -68,16 +78,6 @@ public class Calc {
       d2mean += Math.pow((mean - num), 2);
     }
     SD = Math.sqrt(d2mean / nums.length);
-    return nums;
-  }
-
-  public double[] flatCurve(double a) {
-    double[] nums = reverse((Double[]) stack.toArray());
-
-    for (int i = 0; i < nums.length; i++) {
-      nums[i] += a;
-    }
-
     return nums;
   }
 
