@@ -9,13 +9,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 public class Calc {
-  static final int NUM_ZEROS_INITIAL =
-      4; // When initializing stack, it starts off with this many zeroes
+  static final int NUM_ZEROS_INITIAL = 4; // When initializing stack, it starts off with this many zeroes
   static final int NUM_REGISTERS_DISPLAYED = 4;
   static final int NUM_LISTS = 4;
   static final String lists_filename = "lists.txt";
@@ -32,12 +29,9 @@ public class Calc {
     }
 
     File list_file = new File(lists_filename);
-    if (!list_file
-        .isDirectory()) { // If file containing lists do not exist (ie no previous session)
+    if (!list_file.isDirectory()) { // If file containing lists do not exist (ie no previous session)
       for (int i = 0; i < NUM_LISTS; ++i) {
-        stacks.put(
-            String.valueOf(i),
-            (Stack<Double>) stack.clone()); // FIXME: not sure if clone is necessary?
+        stacks.put(String.valueOf(i), (Stack<Double>) stack.clone()); // FIXME: not sure if clone is necessary?
       }
       storeLists();
     } else {
@@ -45,8 +39,8 @@ public class Calc {
     }
   }
 
-  public double[] rootCurve(double a) {
-    double[] nums = reverse((Double[]) stack.toArray());
+  public Double[] rootCurve(double a) {
+    Double[] nums = reverse((Double[]) stack.toArray());
 
     // Root Curve Function: F(X)=(100^(1-a))*(x^a)
     for (int i = 0; i < nums.length; i++) {
@@ -56,8 +50,8 @@ public class Calc {
     return nums;
   }
 
-  public double[] flatCurve(double a) {
-    double[] nums = reverse((Double[]) stack.toArray());
+  public Double[] flatCurve(double a) {
+    Double[] nums = reverse((Double[]) (stack.toArray()));
 
     for (int i = 0; i < nums.length; i++) {
       nums[i] += a;
@@ -66,8 +60,8 @@ public class Calc {
     return nums;
   }
 
-  public double[] bellCurve() {
-    double[] nums = reverse((Double[]) stack.toArray());
+  public Double[] bellCurve() {
+    Double[] nums = reverse((Double[]) stack.toArray());
     double mean = mean(nums);
     double stddev = stddev(nums);
 
@@ -76,7 +70,6 @@ public class Calc {
     for (Double num : nums) {
       val += num;
     }
-    double mean = val / nums.length;
     for (Double num : nums) {
       d2mean += Math.pow((mean - num), 2);
     }
@@ -84,7 +77,7 @@ public class Calc {
     return nums;
   }
 
-  private double mean(double[] input) {
+  private double mean(Double[] input) {
     double sum = 0;
 
     for (double v : input) {
@@ -94,7 +87,7 @@ public class Calc {
     return sum / input.length;
   }
 
-  private double stddev(double[] input) {
+  private double stddev(Double[] input) {
     double mean = mean(input);
 
     double sum = 0;
@@ -105,16 +98,19 @@ public class Calc {
     return Math.sqrt(sum / input.length);
   }
 
-  private double[] reverse(Double[] input) {
-    for (int i = 0; i < input.length / 2; i++) {
-      double temp = input[i];
-      input[i] = input[input.length - 1 - i];
-      input[input.length - 1 - i] = temp;
+  public static Double[] reverse(Double[] input) {
+    Double[] result = input.clone();
+
+    for (int i = 0; i < result.length / 2; ++i) {
+      double temp = result[i];
+      result[i] = result[result.length - i - 1];
+      result[result.length - i - 1] = temp;
     }
+
+    return result;
   }
 
   public void storeList(String register) {
-    // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
     stacks.put(register, stack);
     storeLists();
   }
@@ -140,7 +136,6 @@ public class Calc {
     }
   }
 
-  // source: https://mkyong.com/java/how-to-read-and-write-java-object-to-a-file/
   public void loadLists() {
     try {
       FileInputStream fis = new FileInputStream(new File(lists_filename));
@@ -241,8 +236,7 @@ public class Calc {
       return;
     }
 
-    double result =
-        Float.NEGATIVE_INFINITY; // Keep as -inf in case something bad happened and no cases matched
+    double result = Float.NEGATIVE_INFINITY; // Keep as -inf in case something bad happened and no cases matched
     double X_double = Double.parseDouble(X);
     double Y = stack.pop();
 
