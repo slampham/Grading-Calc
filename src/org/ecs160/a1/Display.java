@@ -48,15 +48,14 @@ public class Display extends Container {
     public void viewLists() {
         List<Stack<Double>> lists = new ArrayList<>(calc.stacks.values()); // WARNING: stacks iterated in reverse order (ie bottom up)
 
-        tRegister.setText("RCL 0: " + reverse(lists.get(0)).toString());
-        zRegister.setText("RCL 1: " + reverse(lists.get(1)).toString());
-        yRegister.setText("RCL 2: " + reverse(lists.get(2)).toString());
-        xRegister.setText("RCL 3: " + reverse(lists.get(3)).toString());
+        tRegister.setText("RCL 0: " + calc.lists(0).toString());
+        zRegister.setText("RCL 1: " + calc.lists(1).toString());
+        yRegister.setText("RCL 2: " + calc.lists(2).toString());
+        xRegister.setText("RCL 3: " + calc.lists(3).toString());
     }
 
     public void viewSummary() {
-//        tRegister.setText("Grades: 8 Z's | 5 F's | 20 C's | 32 B's | 20 A's");
-
+        tRegister.setText("Grades: 8 Z's | 5 F's | 20 C's | 32 B's | 20 A's");
         zRegister.setText("Standard Deviation: 17");
         yRegister.setText("Min: 0 | Max: 97");
         xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");

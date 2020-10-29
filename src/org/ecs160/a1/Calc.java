@@ -129,7 +129,7 @@ public class Calc {
 
   public void loadList(String register) {
     loadLists();
-    stack = stacks.get(register);
+    stack = (Stack<Double>) stacks.get(register).clone();
     X = "";
   }
 
@@ -348,7 +348,10 @@ public class Calc {
     return lists;
   }
 
-
+  public List<Double> lists(int index) {
+    List<List<Double>> lists = lists();
+    return lists.get(index);
+  }
 
   public static List<Double> reverse(List<Double> list) {
     List<Double> result = new ArrayList<>(list);
