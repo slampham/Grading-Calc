@@ -12,7 +12,6 @@ import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class Calc {
-  static final int NUM_ZEROS_INITIAL = 4; // When initializing stack, it starts off with this many zeroes
   static final int NUM_REGISTERS_DISPLAYED = 4;
   static final int NUM_LISTS = 4;
   static final String lists_filename = "lists.txt";
@@ -24,10 +23,6 @@ public class Calc {
   String X = ""; // Keep as string to add on digit / period.
 
   public Calc() {
-    for (int i = 0; i < NUM_ZEROS_INITIAL; ++i) {
-      pushStack("0");
-    }
-
     File list_file = new File(lists_filename);
     if (!list_file.isDirectory()) { // If file containing lists do not exist (ie no previous session)
       for (int i = 0; i < NUM_LISTS; ++i) {
