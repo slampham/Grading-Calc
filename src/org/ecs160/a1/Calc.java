@@ -64,16 +64,8 @@ public class Calc {
     Double[] nums = reverse((Double[]) stack.toArray());
     double mean = mean(nums);
     double stddev = stddev(nums);
-
     /* TODO: curve nums using bell curve. **************************************/
-    double val = 0, d2mean = 0, SD = 0;
-    for (Double num : nums) {
-      val += num;
-    }
-    for (Double num : nums) {
-      d2mean += Math.pow((mean - num), 2);
-    }
-    SD = Math.sqrt(d2mean / nums.length);
+  
     return nums;
   }
 
