@@ -18,19 +18,22 @@ public class Calc {
 
   static Stack<Double> stack = new Stack<>();
   HashMap<String, Stack<Double>> stacks = new HashMap<>();
+
   boolean operator_last_pressed = false;
   boolean enter_last_pressed = false;
   String X = ""; // Keep as string to add on digit / period.
 
   public Calc() {
     File list_file = new File(lists_filename);
-    if (!list_file.isDirectory()) { // If file containing lists do not exist (ie no previous session)
+
+    if (list_file.exists()) {
+      loadLists();
+    }
+    else {
       for (int i = 0; i < NUM_LISTS; ++i) {
         stacks.put(String.valueOf(i), (Stack<Double>) stack.clone()); // FIXME: not sure if clone is necessary?
       }
       storeLists();
-    } else {
-      loadLists();
     }
   }
 
