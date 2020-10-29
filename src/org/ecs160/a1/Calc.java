@@ -89,6 +89,28 @@ public class Calc {
 
     return Math.sqrt(sum / input.length);
   }
+  
+  private double max() {
+    Double[] nums = reverse((Double[]) stack.toArray());
+    double max = 0;
+    for (Double num : nums) {
+      if (num > max) {
+        max = num;
+      }
+    }
+    return max;
+  }
+
+  private double min() {
+    Double[] nums = reverse((Double[]) stack.toArray());
+    double min = 0;
+    for (Double num : nums) {
+      if (num < min) {
+        min = num;
+      }
+    }
+    return min;
+  }
 
   public static Double[] reverse(Double[] input) {
     Double[] result = input.clone();
