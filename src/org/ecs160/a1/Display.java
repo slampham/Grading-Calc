@@ -8,8 +8,6 @@ import java.util.*;
 import java.util.List;
 
 public class Display extends Container {
-    String mode = "viewRegisters";
-
     Label tRegister = new Label("T: ");
     Label zRegister = new Label("Z: ");
     Label yRegister = new Label("Y: ");
@@ -57,7 +55,8 @@ public class Display extends Container {
     }
 
     public void viewSummary() {
-        tRegister.setText("Grades: 8 Z's | 5 F's | 20 C's | 32 B's | 20 A's");
+//        tRegister.setText("Grades: 8 Z's | 5 F's | 20 C's | 32 B's | 20 A's");
+
         zRegister.setText("Standard Deviation: 17");
         yRegister.setText("Min: 0 | Max: 97");
         xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");

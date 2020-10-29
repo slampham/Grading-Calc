@@ -301,6 +301,7 @@ public class Calc {
     hist.put("D", 0);
     hist.put("D-", 0);
     hist.put("F", 0);
+    hist.put("Z", 0);
 
     for (double grade : grades) {
       if (grade >= 97) {
@@ -327,11 +328,31 @@ public class Calc {
         hist.compute("D", (k, v) -> v + 1);
       } else if (grade >= 60) {
         hist.compute("D-", (k, v) -> v + 1);
-      } else {
+      } else if (grade > 0) {
         hist.compute("F", (k, v) -> v + 1);
+      } else {
+        hist.compute("Z", (k, v) -> v + 1);
       }
     }
 
     return hist;
+  }
+
+  public List<List<Double>> lists() {
+    List<List<Double>> lists = new ArrayList<>(stacks.values());
+
+    for (List<Double> list : lists) {
+      Collections.reverse(list);
+    }
+
+    return lists;
+  }
+
+
+
+  public static List<Double> reverse(List<Double> list) {
+    List<Double> result = new ArrayList<>(list);
+    Collections.reverse(result);
+    return result;
   }
 }
