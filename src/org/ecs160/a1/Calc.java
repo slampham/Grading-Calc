@@ -31,7 +31,7 @@ public class Calc {
     }
     else {
       for (int i = 0; i < NUM_LISTS; ++i) {
-        stacks.put(String.valueOf(i), (Stack<Double>) stack.clone()); // FIXME: not sure if clone is necessary?
+        stacks.put(String.valueOf(i), new Stack<>());
       }
       storeLists();
     }
@@ -123,7 +123,7 @@ public class Calc {
   }
 
   public void storeList(String register) {
-    stacks.put(register, stack);
+    stacks.put(register, (Stack<Double>) stack.clone());
     storeLists();
   }
 
