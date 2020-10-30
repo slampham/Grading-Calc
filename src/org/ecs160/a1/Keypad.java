@@ -22,7 +22,6 @@ public class Keypad extends Container {
     Button recall = new ScienceButton("rcl");
     Button root = new ScienceButton("root");
     Button bell = new ScienceButton("bell");
-    Button undo = new ScienceButton("undo");
     Button exit = new ScienceButton("exit");
     Button plusminus = new ScienceButton("+/-");
     Button stat = new ScienceButton("stat");
@@ -98,17 +97,17 @@ public class Keypad extends Container {
 
     public void keypadRow0() {
         // Create the 1st row of the keypad (2 rows of 5 buttons)
-        sci0.addAll(grades, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE);
+        sci0.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, yX, overX, bSQRT);
     }
 
     public void keypadRow1() {
         // Create the 2nd row of the keypad (2 rows of 5 buttons)
-        sci1.addAll(exit, plusminus, stat, overX, yX, store, recall, root, bell, undo);
+        sci1.addAll(stat, grades, store, bPi, bE, recall, root, bell, plusminus);
     }
 
     public void keypadRow2() {
         // Create the 3rd row of the keypad (5 buttons)
-        num2.addAll(bPop, b7, b8, b9, bSlash);
+        num2.addAll(bEnter, b7, b8, b9, bSlash);
     }
 
     public void keypadRow3() {
@@ -123,7 +122,7 @@ public class Keypad extends Container {
 
     public void keypadRow5() {
         // Create the 6th row of the keypad (5 buttons)
-        num5.addAll(bEnter, b0, bDecimal, bYX, bPlus);
+        num5.addAll(exit, b0, bDecimal, bPop, bPlus);
     }
 
     public void buttonPressListeners() {
