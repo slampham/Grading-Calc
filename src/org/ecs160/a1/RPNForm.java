@@ -8,7 +8,7 @@ import com.codename1.ui.layouts.GridLayout;
 public class RPNForm extends com.codename1.ui.Form {
     Calc calc = new Calc();
     Display display = new Display(new BoxLayout(BoxLayout.Y_AXIS), calc);
-    Keypad keypad = new Keypad(new GridLayout(5,1), calc, display);
+    Keypad keypad = new Keypad(new GridLayout(6,1), calc, display);
 
     public RPNForm() {
         setLayout(new BorderLayout());

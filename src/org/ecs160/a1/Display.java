@@ -1,8 +1,10 @@
 package org.ecs160.a1;
 
+import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.Layout;
+import com.codename1.ui.plaf.Border;
 
 import java.util.*;
 import java.util.List;
@@ -18,6 +20,8 @@ public class Display extends Container {
     public Display(Layout layout, Calc calc) {
         super(layout);
         this.calc = calc;
+
+        this.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN)); // Set border around 5th row
 
         // four containers to populate display
         Container tRegisterRow = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -54,7 +58,8 @@ public class Display extends Container {
 
     public void viewSummary() {
         tRegister.setText("Grades: 8 Z's | 5 F's | 20 C's | 32 B's | 20 A's");
-        zRegister.setText("Standard Deviation: 17");
+        tRegister.setText(calc.gradeHistogram().toString());
+        zRegister.setText("STD Dev: 17");
         yRegister.setText("Min: 0 | Max: 97");
         xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");
     }

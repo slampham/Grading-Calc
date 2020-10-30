@@ -1,10 +1,8 @@
 package org.ecs160.a1;
 
-import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.Layout;
-import com.codename1.ui.plaf.Border;
 
 public class Keypad extends Container {
     Button prev_key_pressed = null;
@@ -100,39 +98,26 @@ public class Keypad extends Container {
     public void keypadRow0() {
         // Create the 1st row of the keypad (2 rows of 5 buttons)
         sci0.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE);
-
-        // Set border around top 10 buttons
-        sci0.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.YELLOW));
     }
 
     public void keypadRow2() {
         // Create the 2nd row of the keypad (5 buttons)
         num2.addAll(bPop, b7, b8, b9, bSlash);
-
-        // Set border around second row
-        num2.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.MAGENTA));
     }
 
     public void keypadRow3() {
         // Create the 3rd row of the keypad (5 buttons)
         num3.addAll(bClear, b4, b5, b6, bStar);
-
-        // Set border around third row
-        num3.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.BLUE));
     }
 
     public void keypadRow4() {
         // Create the 4th row of the keypad (5 buttons)
         num4.addAll(bBack, b1, b2, b3, bMinus);
-
-        // Set border around 4th row
-        num4.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.CYAN));
     }
 
     public void keypadRow5() {
         // Create the 5th row of the keypad (5 buttons)
         num5.addAll(bEnter, b0, bDecimal, bYX, bPlus);
-        num5.getAllStyles().setBorder(Border.createLineBorder(4, ColorUtil.GREEN)); // Set border around 5th row
     }
 
     public void buttonPressListeners() {

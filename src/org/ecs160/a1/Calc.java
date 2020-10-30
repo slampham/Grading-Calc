@@ -288,7 +288,9 @@ public class Calc {
     X = String.valueOf(stack.pop());
   }
 
-  public HashMap<String, Integer> gradeHistogram(double[] grades) {
+  public HashMap<String, Integer> gradeHistogram() {
+    List<Double> grades = new ArrayList<>(stack);
+
     HashMap<String, Integer> hist = new HashMap<>();
     hist.put("A+", 0);
     hist.put("A", 0);
@@ -305,7 +307,7 @@ public class Calc {
     hist.put("F", 0);
     hist.put("Z", 0);
 
-    for (double grade : grades) {
+    for (Double grade : grades) {
       if (grade >= 97) {
         hist.compute("A+", (k, v) -> v + 1);
       } else if (grade >= 93) {
