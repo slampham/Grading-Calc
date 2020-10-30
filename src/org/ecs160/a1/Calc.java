@@ -62,6 +62,18 @@ public class Calc {
     return nums;
   }
 
+  // consider the highest score to be 100% and regrade the rest of the scores as if their denominator was the highest
+  public Double[] maxCurve() {
+    Double[] nums = reverse((Double[]) stack.toArray());
+
+    double max = max();
+    for (int i = 0; i < nums.length; i++) {
+      nums[i] = nums[i] / max * 100;
+    }
+
+    return nums;
+  }
+
   public Double[] bellCurve() {
     Double[] nums = reverse((Double[]) stack.toArray());
     double mean = mean(nums);
