@@ -2,16 +2,22 @@ package org.ecs160.a1;
 
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.*;
+import com.codename1.ui.plaf.RoundBorder;
 
 public class ScienceButton extends Button {
     public ScienceButton(String text) {
         super(text);
 
+        this.getUnselectedStyle().setBorder(
+                RoundBorder.create().rectangle(true).color(0x334E58)
+        );
+
         this.getUnselectedStyle().setBgTransparency(255);
-        this.getUnselectedStyle().setBgColor(ColorUtil.GREEN);
+        this.getUnselectedStyle().setBgColor(0x334E58);
         this.getUnselectedStyle().setFgColor(ColorUtil.WHITE);
 
-        // Can add selectedStyle for when button is pressed. Otherwise it defaults to white BG with light blue text
-        this.getAllStyles().setMargin(25, 25, 15, 15); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
+        this.getSelectedStyle().setFgColor(0x334E58);
+
+        this.getAllStyles().setMargin(15, 15, 15, 15); // Margin parameters: TOP, BOTTOM, LEFT, RIGHT
     }
 }

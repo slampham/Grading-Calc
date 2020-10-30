@@ -1,5 +1,6 @@
 package org.ecs160.a1;
 
+import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.Layout;
@@ -28,6 +29,7 @@ public class Keypad extends Container {
     Button info = new ScienceButton("info");
     Button overX = new ScienceButton("1/x");
     Button yX = new ScienceButton("y^x");
+
     Button bSin = new ScienceButton("sin");
     Button bCos = new ScienceButton("cos");
     Button bTan = new ScienceButton("tan");
@@ -76,6 +78,9 @@ public class Keypad extends Container {
 
         buttonPressListeners();
 
+        this.getAllStyles().setBgTransparency(255);
+        this.getAllStyles().setBgColor(0x202020); // dark gray
+
         Container[] key_rows = {sci0, sci1, num2, num3, num4, num5};
         this.addAll(key_rows); // Keypad Container adds all key rows
 
@@ -91,32 +96,33 @@ public class Keypad extends Container {
         }
     }
 
-    public void keypadRow1() {
-        sci1.addAll(exit, plusminus, info, overX, yX, store, recall, root, bell, undo);
-    }
-
     public void keypadRow0() {
         // Create the 1st row of the keypad (2 rows of 5 buttons)
         sci0.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE);
     }
 
+    public void keypadRow1() {
+        // Create the 2nd row of the keypad (2 rows of 5 buttons)
+        sci1.addAll(exit, plusminus, info, overX, yX, store, recall, root, bell, undo);
+    }
+
     public void keypadRow2() {
-        // Create the 2nd row of the keypad (5 buttons)
+        // Create the 3rd row of the keypad (5 buttons)
         num2.addAll(bPop, b7, b8, b9, bSlash);
     }
 
     public void keypadRow3() {
-        // Create the 3rd row of the keypad (5 buttons)
+        // Create the 4th row of the keypad (5 buttons)
         num3.addAll(bClear, b4, b5, b6, bStar);
     }
 
     public void keypadRow4() {
-        // Create the 4th row of the keypad (5 buttons)
+        // Create the 5th row of the keypad (5 buttons)
         num4.addAll(bBack, b1, b2, b3, bMinus);
     }
 
     public void keypadRow5() {
-        // Create the 5th row of the keypad (5 buttons)
+        // Create the 6th row of the keypad (5 buttons)
         num5.addAll(bEnter, b0, bDecimal, bYX, bPlus);
     }
 

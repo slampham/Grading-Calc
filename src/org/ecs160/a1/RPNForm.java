@@ -14,6 +14,10 @@ public class RPNForm extends com.codename1.ui.Form {
         setLayout(new BorderLayout());
         setTitle("RPN Calculator v0.1");
 
+        // adds safe areas for iPhones (raises keypad)
+        display.setSafeArea(true);
+        keypad.setSafeArea(true);
+
         add(BorderLayout.NORTH, display);
         add(BorderLayout.CENTER, keypad);
     }
