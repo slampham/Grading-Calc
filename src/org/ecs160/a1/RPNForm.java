@@ -1,5 +1,6 @@
 package org.ecs160.a1;
 
+import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
@@ -12,7 +13,7 @@ public class RPNForm extends com.codename1.ui.Form {
 
     public RPNForm() {
         setLayout(new BorderLayout());
-        setTitle("RPN Calculator v0.1");
+        getToolbar().hideToolbar();
 
         // adds safe areas for iPhones (raises keypad)
         display.setSafeArea(true);

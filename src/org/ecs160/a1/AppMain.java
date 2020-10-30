@@ -45,6 +45,7 @@ public class AppMain {
             current.show();
             return;
         }
+        Toolbar.setGlobalToolbar(true);
         com.codename1.ui.Form hi = new RPNForm();
         hi.show();
     }
