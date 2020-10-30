@@ -9,7 +9,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Calc {
@@ -20,7 +24,6 @@ public class Calc {
   static Stack<Double> stack = new Stack<>();
   HashMap<String, Stack<Double>> stacks = new HashMap<>();
 
-
   boolean operator_last_pressed = false;
   boolean enter_last_pressed = false;
   String X = ""; // Keep as string to add on digit / period.
@@ -30,8 +33,7 @@ public class Calc {
 
     if (list_file.exists()) {
       loadLists();
-    }
-    else {
+    } else {
       for (int i = 0; i < NUM_LISTS; ++i) {
         stacks.put(String.valueOf(i), new Stack<>());
       }
@@ -65,7 +67,7 @@ public class Calc {
     double mean = mean(nums);
     double stddev = stddev(nums);
     /* TODO: curve nums using bell curve. **************************************/
-  
+
     return nums;
   }
 
@@ -89,26 +91,30 @@ public class Calc {
 
     return Math.sqrt(sum / input.length);
   }
-  
+
   private double max() {
     Double[] nums = reverse((Double[]) stack.toArray());
+
     double max = 0;
     for (Double num : nums) {
       if (num > max) {
         max = num;
       }
     }
+
     return max;
   }
 
   private double min() {
     Double[] nums = reverse((Double[]) stack.toArray());
+
     double min = 0;
     for (Double num : nums) {
       if (num < min) {
         min = num;
       }
     }
+
     return min;
   }
 
@@ -250,7 +256,8 @@ public class Calc {
       return;
     }
 
-    double result = Float.NEGATIVE_INFINITY; // Keep as -inf in case something bad happened and no cases matched
+    double result =
+        Float.NEGATIVE_INFINITY; // Keep as -inf in case something bad happened and no cases matched
     double X_double = Double.parseDouble(X);
     double Y = stack.pop();
 
@@ -344,7 +351,9 @@ public class Calc {
 
   public List<List<Double>> lists() {
     List<List<Double>> lists = new ArrayList<>(stacks.values());
-    List<List<Double>> result = lists.stream().map(ArrayList::new).collect(Collectors.toList()); // SOURCE: https://stackoverflow.com/questions/47879142/copy-two-dimensional-arraylist-as-new
+
+    // SOURCE: https://stackoverflow.com/questions/47879142/copy-two-dimensional-arraylist-as-new
+    List<List<Double>> result = lists.stream().map(ArrayList::new).collect(Collectors.toList());
 
     for (List<Double> list : result) {
       Collections.reverse(list);
