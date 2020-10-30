@@ -62,7 +62,8 @@ public class Calc {
     return nums;
   }
 
-  // consider the highest score to be 100% and regrade the rest of the scores as if their denominator was the highest
+  // consider the highest score to be 100% and regrade the rest of the scores as if their
+  // denominator was the highest
   public Double[] maxCurve() {
     Double[] nums = reverse((Double[]) stack.toArray());
 
@@ -74,11 +75,17 @@ public class Calc {
     return nums;
   }
 
-  public Double[] bellCurve() {
+  // curves grades using a normal distribution. The target_average parameter specifies the score
+  // that the average grade will take. For example, if a student scored 70 / 100 on an exam but we
+  // want to curve them up so that the class average is an 80 / 100, the parameter would be 80.
+  public Double[] bellCurve(double target_average) {
     Double[] nums = reverse((Double[]) stack.toArray());
     double mean = mean(nums);
     double stddev = stddev(nums);
-    /* TODO: curve nums using bell curve. **************************************/
+
+    for (int i = 0; i < nums.length; i++) {
+      nums[i] = target_average + 10 * (nums[i] - mean) / stddev;
+    }
 
     return nums;
   }
