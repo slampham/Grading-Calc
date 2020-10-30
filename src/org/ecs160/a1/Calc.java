@@ -9,11 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Calc {
@@ -21,7 +17,7 @@ public class Calc {
   static final int NUM_LISTS = 4;
   static final String lists_filename = "lists.txt";
 
-  static Stack<Double> stack = new Stack<>();
+  Stack<Double> stack = new Stack<>();
   HashMap<String, Stack<Double>> stacks = new HashMap<>();
 
   boolean operator_last_pressed = false;
@@ -65,9 +61,9 @@ public class Calc {
   // consider the highest score to be 100% and regrade the rest of the scores as if their
   // denominator was the highest
   public Double[] maxCurve() {
-    Double[] nums = reverse((Double[]) stack.toArray());
+    Double[] nums = reverse(stack.toArray(new Double[stack.size()]));;
 
-    double max = max();
+    double max = max(nums);
     for (int i = 0; i < nums.length; i++) {
       nums[i] = nums[i] / max * 100;
     }
@@ -90,7 +86,7 @@ public class Calc {
     return nums;
   }
 
-  private double mean(Double[] input) {
+  public double mean(Double[] input) {
     double sum = 0;
 
     for (double v : input) {
@@ -100,7 +96,32 @@ public class Calc {
     return sum / input.length;
   }
 
-  private double stddev(Double[] input) {
+  public double median(Double[] input) {
+    return input[input.length / 2];
+  }
+
+  public double mode(Double[] input) {
+    HashMap<Double, Integer> num_freq = new HashMap<>();
+
+    for (Double num : input) {
+      Integer count = num_freq.getOrDefault(num, 0);
+      num_freq.put(num, count + 1);
+    }
+
+    Double mode = 0.;
+    int max_freq = 0;
+
+    for (Map.Entry<Double, Integer> entry : num_freq.entrySet()) {
+      if (entry.getValue() > max_freq) {
+        mode = entry.getKey();
+        max_freq = entry.getValue();
+      }
+    }
+
+    return mode;
+  }
+
+  public double stddev(Double[] input) {
     double mean = mean(input);
 
     double sum = 0;
@@ -111,11 +132,9 @@ public class Calc {
     return Math.sqrt(sum / input.length);
   }
 
-  private double max() {
-    Double[] nums = reverse((Double[]) stack.toArray());
-
+  public double max(Double[] input) {
     double max = 0;
-    for (Double num : nums) {
+    for (Double num : input) {
       if (num > max) {
         max = num;
       }
@@ -124,11 +143,9 @@ public class Calc {
     return max;
   }
 
-  private double min() {
-    Double[] nums = reverse((Double[]) stack.toArray());
-
+  public double min(Double[] input) {
     double min = 0;
-    for (Double num : nums) {
+    for (Double num : input) {
       if (num < min) {
         min = num;
       }

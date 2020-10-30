@@ -1,6 +1,5 @@
 package org.ecs160.a1;
 
-import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.Layout;
@@ -26,7 +25,7 @@ public class Keypad extends Container {
     Button undo = new ScienceButton("undo");
     Button exit = new ScienceButton("exit");
     Button plusminus = new ScienceButton("+/-");
-    Button info = new ScienceButton("info");
+    Button stat = new ScienceButton("stat");
     Button overX = new ScienceButton("1/x");
     Button yX = new ScienceButton("y^x");
 
@@ -104,7 +103,7 @@ public class Keypad extends Container {
 
     public void keypadRow1() {
         // Create the 2nd row of the keypad (2 rows of 5 buttons)
-        sci1.addAll(exit, plusminus, info, overX, yX, store, recall, root, bell, undo);
+        sci1.addAll(exit, plusminus, stat, overX, yX, store, recall, root, bell, undo);
     }
 
     public void keypadRow2() {
@@ -131,6 +130,10 @@ public class Keypad extends Container {
         digitPressed(new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8, b9});
         unaryOpOrConstPressed(new Button[] {bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE, plusminus, overX});
         binaryOpPressed(new Button[] {bMinus, bSlash, bStar, bYX, bPlus});
+
+        stat.addActionListener(evt -> {
+            display.viewStats();
+        });
 
         grades.addActionListener(evt -> {
             display.viewGrades();

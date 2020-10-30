@@ -61,11 +61,20 @@ public class Display extends Container {
         xRegister.setText("RCL 3: " + calc.lists().get(3).toString());
     }
 
-    public void viewSummary() {
-        tRegister.setText("Grades: 8 Z's | 5 F's | 20 C's | 32 B's | 20 A's");
-        zRegister.setText("STD Dev: 17");
-        yRegister.setText("Min: 0 | Max: 97");
-        xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");
+    public void viewStats() {
+        Double[] list = calc.stack.toArray(new Double[calc.stack.size()]);
+
+        double mean = calc.mean(list);
+        double median = calc.median(list);
+        double mode = calc.mode(list);
+        double max = calc.max(list);
+        double min = calc.min(list);
+        double std_dev = calc.stddev(list);
+
+        tRegister.setText("SUMMARY:");
+        zRegister.setText(String.format("Mean: %.1f | Median: %.1f", mean, median));
+        yRegister.setText(String.format("Mode: %.1f | Std Dev: %.1f", mode, std_dev));
+        xRegister.setText(String.format("Min: %.1f | Max: %.1f", min, max));
     }
 
     public void viewGrades() {
