@@ -128,7 +128,7 @@ public class Keypad extends Container {
 
     public void buttonPressListeners() {
         digitPressed(new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8, b9});
-        unaryOpOrConstPressed(new Button[] {bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE});
+        unaryOpOrConstPressed(new Button[] {bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE, plusminus, overX});
         binaryOpPressed(new Button[] {bMinus, bSlash, bStar, bYX, bPlus});
 
         bDecimal.addActionListener(evt -> {

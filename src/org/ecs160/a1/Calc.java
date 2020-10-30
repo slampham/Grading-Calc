@@ -250,6 +250,10 @@ public class Calc {
 
   public void unaryOpOrConst(Button button) {
     /* Ex: log, pi, e^x, x^2 */
+    if (X.equals("")) {
+      // avoid empty string error
+      X = "0.0";
+    }
     double X_double = Double.parseDouble(X);
 
     switch (button.getText()) {
@@ -278,6 +282,17 @@ public class Calc {
         X_double = Math.sqrt(X_double);
         break;
         // TODO: add rest of comments
+      case "E":
+        X_double = Math.E;
+        break;
+      case "pi":
+        X_double = Math.PI;
+        break;
+      case "+/-":
+        X_double = -X_double;
+        break;
+      case "1/x":
+        X_double = 1/X_double;
     }
 
     X = String.valueOf(X_double);
