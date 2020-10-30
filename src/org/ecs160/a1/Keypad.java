@@ -22,6 +22,7 @@ public class Keypad extends Container {
     Button recall = new ScienceButton("rcl");
     Button root = new ScienceButton("root");
     Button bell = new ScienceButton("bell");
+    Button max = new ScienceButton("max");
     Button exit = new ScienceButton("exit");
     Button plusminus = new ScienceButton("+/-");
     Button stat = new ScienceButton("stat");
@@ -102,7 +103,7 @@ public class Keypad extends Container {
 
     public void keypadRow1() {
         // Create the 2nd row of the keypad (2 rows of 5 buttons)
-        sci1.addAll(stat, grades, store, bPi, bE, recall, root, bell, plusminus);
+        sci1.addAll(stat, grades, store, bPi, bE, recall, root, bell, max, plusminus);
     }
 
     public void keypadRow2() {
@@ -129,6 +130,21 @@ public class Keypad extends Container {
         digitPressed(new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8, b9});
         unaryOpOrConstPressed(new Button[] {bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE, plusminus, overX});
         binaryOpPressed(new Button[] {bMinus, bSlash, bStar, bYX, bPlus});
+
+        root.addActionListener(evt -> {
+            calc.rootCurve(2 / 3.);
+            display.updateRegisters();
+        });
+
+        bell.addActionListener(evt -> {
+            calc.bellCurve(80);
+            display.updateRegisters();
+        });
+
+        max.addActionListener(evt -> {
+            calc.maxCurve();
+            display.updateRegisters();
+        });
 
         stat.addActionListener(evt -> {
             display.viewStats();

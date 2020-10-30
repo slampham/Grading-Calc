@@ -37,19 +37,15 @@ public class Calc {
     }
   }
 
-  public Double[] rootCurve(double a) {
-    Double[] nums = reverse((Double[]) stack.toArray());
-
+  public void rootCurve(double a) {
     // Root Curve Function: F(X)=(100^(1-a))*(x^a)
-    for (int i = 0; i < nums.length; i++) {
-      nums[i] = Math.pow(100, (1 - a)) * Math.pow(nums[i], a);
+    for (int i = 0; i < stack.size(); i++) {
+      stack.set(i, Math.pow(100, (1 - a)) * Math.pow(stack.get(i), a));
     }
-
-    return nums;
   }
 
   public Double[] flatCurve(double a) {
-    Double[] nums = reverse((Double[]) (stack.toArray()));
+    Double[] nums = stack.toArray(new Double[stack.size()]);
 
     for (int i = 0; i < nums.length; i++) {
       nums[i] += a;
@@ -60,30 +56,23 @@ public class Calc {
 
   // consider the highest score to be 100% and regrade the rest of the scores as if their
   // denominator was the highest
-  public Double[] maxCurve() {
-    Double[] nums = reverse(stack.toArray(new Double[stack.size()]));;
-
-    double max = max(nums);
-    for (int i = 0; i < nums.length; i++) {
-      nums[i] = nums[i] / max * 100;
+  public void maxCurve() {
+    double max = max(stack.toArray(new Double[stack.size()]));
+    for (int i = 0; i < stack.size(); i++) {
+      stack.set(i, stack.get(i) / max * 100);
     }
-
-    return nums;
   }
 
   // curves grades using a normal distribution. The target_average parameter specifies the score
   // that the average grade will take. For example, if a student scored 70 / 100 on an exam but we
   // want to curve them up so that the class average is an 80 / 100, the parameter would be 80.
-  public Double[] bellCurve(double target_average) {
-    Double[] nums = reverse((Double[]) stack.toArray());
-    double mean = mean(nums);
-    double stddev = stddev(nums);
+  public void bellCurve(double target_average) {
+    double mean = mean(stack.toArray(new Double[stack.size()]));
+    double stddev = stddev(stack.toArray(new Double[stack.size()]));
 
-    for (int i = 0; i < nums.length; i++) {
-      nums[i] = target_average + 10 * (nums[i] - mean) / stddev;
+    for (int i = 0; i < stack.size(); i++) {
+      stack.set(i, target_average + 10 * (stack.get(i) - mean) / stddev);
     }
-
-    return nums;
   }
 
   public double mean(Double[] input) {
