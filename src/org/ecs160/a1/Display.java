@@ -63,10 +63,18 @@ public class Display extends Container {
 
     public void viewSummary() {
         tRegister.setText("Grades: 8 Z's | 5 F's | 20 C's | 32 B's | 20 A's");
-        tRegister.setText(calc.gradeHistogram().toString());
         zRegister.setText("STD Dev: 17");
         yRegister.setText("Min: 0 | Max: 97");
         xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");
+    }
+
+    public void viewGrades() {
+        HashMap<String, Integer> grade_hist = calc.gradeHistogram();
+
+        tRegister.setText("GRADES:");
+        zRegister.setText(printGrade(new String[]{"A", "A-", "B+", "B", "B-"}, grade_hist));
+        yRegister.setText(printGrade(new String[]{"C+", "C", "C-", "D+", "D"}, grade_hist));
+        xRegister.setText(printGrade(new String[]{"D-", "F", "Z"}, grade_hist));
     }
 
     public void setRegisterStyles() {
@@ -81,5 +89,15 @@ public class Display extends Container {
         zRegister.getAllStyles().setFgColor(ColorUtil.WHITE);
         yRegister.getAllStyles().setFgColor(ColorUtil.WHITE);
         xRegister.getAllStyles().setFgColor(ColorUtil.WHITE);
+    }
+
+    private String printGrade(String[] grades, HashMap<String, Integer> grade_hist) {
+        StringBuilder out = new StringBuilder();
+
+        for (String grade : grades) {
+            out.append(grade_hist.get(grade).toString()).append(grade).append(" | ");
+        }
+
+        return out.toString();
     }
 }

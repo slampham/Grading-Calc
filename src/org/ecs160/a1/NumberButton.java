@@ -4,8 +4,6 @@ import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Button;
 import com.codename1.ui.plaf.RoundBorder;
 
-import java.io.IOException;
-
 public class NumberButton extends Button {
     public NumberButton(String text) {
         super(text);

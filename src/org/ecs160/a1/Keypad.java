@@ -30,6 +30,7 @@ public class Keypad extends Container {
     Button overX = new ScienceButton("1/x");
     Button yX = new ScienceButton("y^x");
 
+    Button grades = new ScienceButton("grd");
     Button bSin = new ScienceButton("sin");
     Button bCos = new ScienceButton("cos");
     Button bTan = new ScienceButton("tan");
@@ -98,7 +99,7 @@ public class Keypad extends Container {
 
     public void keypadRow0() {
         // Create the 1st row of the keypad (2 rows of 5 buttons)
-        sci0.addAll(bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE);
+        sci0.addAll(grades, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE);
     }
 
     public void keypadRow1() {
@@ -130,6 +131,10 @@ public class Keypad extends Container {
         digitPressed(new Button[] {b0, b1, b2, b3, b4, b5, b6, b7, b8, b9});
         unaryOpOrConstPressed(new Button[] {bSin, bCos, bTan, bLog, bLn, bX2, bX3, bSQRT, bPi, bE, plusminus, overX});
         binaryOpPressed(new Button[] {bMinus, bSlash, bStar, bYX, bPlus});
+
+        grades.addActionListener(evt -> {
+            display.viewGrades();
+        });
 
         bDecimal.addActionListener(evt -> {
             calc.digitOrDecimal(bDecimal);

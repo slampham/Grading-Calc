@@ -206,9 +206,7 @@ public class Calc {
     /* Return values in the registers displayed */
     double[] registers = new double[NUM_REGISTERS_DISPLAYED];
 
-    for (int i = stack.size() - 1, j = 0;
-        j < NUM_REGISTERS_DISPLAYED && j < stack.size();
-        --i, ++j) {
+    for (int i = stack.size() - 1, j = 0; j < NUM_REGISTERS_DISPLAYED && j < stack.size(); --i, ++j) {
       registers[j] = stack.get(i);
     }
 
@@ -224,10 +222,7 @@ public class Calc {
       X = "";
     }
 
-    if (button.getText().equals(".") && X.contains(".")) {
-      // do not allow another decimal
-      // do nothing
-    } else {
+    if (!X.contains(".") || !button.getText().equals(".")) { // Don't allow two decimals in X
       X += button.getText(); // Concatenate digits pressed
     }
     operator_last_pressed = enter_last_pressed = false;
@@ -249,7 +244,6 @@ public class Calc {
   }
 
   public void unaryOpOrConst(Button button) {
-    /* Ex: log, pi, e^x, x^2 */
     if (X.equals("")) {
       // avoid empty string error
       X = "0.0";
@@ -284,7 +278,6 @@ public class Calc {
       case "sqrt":
         X_double = Math.sqrt(X_double);
         break;
-        // TODO: add rest of comments
       case "E":
         X_double = Math.E;
         break;
@@ -303,13 +296,11 @@ public class Calc {
   }
 
   public void binaryOp(Button button) {
-    /* Ex: *, +, - */
     if (stack.size() <= 0) { // Error: if nothing on stack
       return;
     }
 
-    double result =
-        Float.NEGATIVE_INFINITY; // Keep as -inf in case something bad happened and no cases matched
+    double result = Float.NEGATIVE_INFINITY; // Keep as -inf in case something bad happened and no cases matched
     double X_double = Double.parseDouble(X);
     double Y = stack.pop();
 
