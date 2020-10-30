@@ -18,6 +18,8 @@ public class RPNForm extends com.codename1.ui.Form {
         // adds safe areas for iPhones (raises keypad)
         display.setSafeArea(true);
         keypad.setSafeArea(true);
+        display.getAllStyles().setPadding(20, 20, 0, 0);
+        keypad.getAllStyles().setPadding(180, 0, 0, 0);
 
         add(BorderLayout.NORTH, display);
         add(BorderLayout.CENTER, keypad);

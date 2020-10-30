@@ -244,6 +244,10 @@ public class Calc {
     }
   }
 
+  public void clear() {
+    X = "";
+  }
+
   public void unaryOpOrConst(Button button) {
     /* Ex: log, pi, e^x, x^2 */
     double X_double = Double.parseDouble(X);
@@ -264,8 +268,14 @@ public class Calc {
       case "x^2":
         X_double = Math.pow(X_double, 2);
         break;
+      case "x^3":
+        X_double = Math.pow(X_double, 3);
+        break;
       case "e^x":
         X_double = Math.exp(X_double);
+        break;
+      case "sqrt":
+        X_double = Math.sqrt(X_double);
         break;
         // TODO: add rest of comments
     }

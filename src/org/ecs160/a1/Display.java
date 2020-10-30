@@ -37,8 +37,8 @@ public class Display extends Container {
 
         this.addAll(tRegisterRow, zRegisterRow, yRegisterRow, xRegisterRow); // Add registers to Display Container
 
-        this.getAllStyles().setBgTransparency(255);
-        this.getAllStyles().setBgColor(0x202020);
+        getAllStyles().setBgTransparency(255);
+        getAllStyles().setBgColor(0x202020);
 
         this.updateRegisters();
         this.revalidate();
