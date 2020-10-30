@@ -224,7 +224,12 @@ public class Calc {
       X = "";
     }
 
-    X += button.getText(); // Concatenate digits pressed
+    if (button.getText().equals(".") && X.contains(".")) {
+      // do not allow another decimal
+      // do nothing
+    } else {
+      X += button.getText(); // Concatenate digits pressed
+    }
     operator_last_pressed = enter_last_pressed = false;
   }
 
