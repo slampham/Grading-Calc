@@ -258,6 +258,9 @@ public class Calc {
 
     switch (button.getText()) {
       case "log":
+        X_double = Math.log10(X_double);
+        break;
+      case "ln":
         X_double = Math.log(X_double);
         break;
       case "sin":
