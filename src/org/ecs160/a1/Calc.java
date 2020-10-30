@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Calc {
   static final int NUM_REGISTERS_DISPLAYED = 4;
@@ -18,6 +19,7 @@ public class Calc {
 
   static Stack<Double> stack = new Stack<>();
   HashMap<String, Stack<Double>> stacks = new HashMap<>();
+
 
   boolean operator_last_pressed = false;
   boolean enter_last_pressed = false;
@@ -279,7 +281,7 @@ public class Calc {
     operator_last_pressed = true;
 
     if (stack.empty()) {
-      X = "0.0";
+      X = "";
       return;
     }
 
@@ -340,22 +342,12 @@ public class Calc {
 
   public List<List<Double>> lists() {
     List<List<Double>> lists = new ArrayList<>(stacks.values());
+    List<List<Double>> result = lists.stream().map(ArrayList::new).collect(Collectors.toList()); // SOURCE: https://stackoverflow.com/questions/47879142/copy-two-dimensional-arraylist-as-new
 
-    for (List<Double> list : lists) {
+    for (List<Double> list : result) {
       Collections.reverse(list);
     }
 
-    return lists;
-  }
-
-  public List<Double> lists(int index) {
-    List<List<Double>> lists = lists();
-    return lists.get(index);
-  }
-
-  public static List<Double> reverse(List<Double> list) {
-    List<Double> result = new ArrayList<>(list);
-    Collections.reverse(result);
     return result;
   }
 }

@@ -46,12 +46,10 @@ public class Display extends Container {
     }
     
     public void viewLists() {
-        List<Stack<Double>> lists = new ArrayList<>(calc.stacks.values()); // WARNING: stacks iterated in reverse order (ie bottom up)
-
-        tRegister.setText("RCL 0: " + calc.lists(0).toString());
-        zRegister.setText("RCL 1: " + calc.lists(1).toString());
-        yRegister.setText("RCL 2: " + calc.lists(2).toString());
-        xRegister.setText("RCL 3: " + calc.lists(3).toString());
+        tRegister.setText("RCL 0: " + calc.lists().get(0).toString());
+        zRegister.setText("RCL 1: " + calc.lists().get(1).toString());
+        yRegister.setText("RCL 2: " + calc.lists().get(2).toString());
+        xRegister.setText("RCL 3: " + calc.lists().get(3).toString());
     }
 
     public void viewSummary() {
@@ -59,11 +57,5 @@ public class Display extends Container {
         zRegister.setText("Standard Deviation: 17");
         yRegister.setText("Min: 0 | Max: 97");
         xRegister.setText("Mean: 77 | Median: 81 | Mode: 0");
-    }
-
-    public static List<Double> reverse(List<Double> list) {
-        List<Double> result = new ArrayList<>(list);
-        Collections.reverse(result);
-        return result;
     }
 }
