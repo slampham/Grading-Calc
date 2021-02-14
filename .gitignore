@@ -13,10 +13,11 @@
 /JavaSE.jar
 /.gitignore
 /icon.png
-/display.png
+/calculator.png
 /codenameone_kotlin.properties
 /.idea/
 /lib/
 /native/
 /nbproject/
 /override/
+calc.gif
